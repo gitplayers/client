@@ -1,15 +1,17 @@
 import React from 'react';
-import { Home } from './Pages';
+import { Home, Game } from './Pages';
 import { Switch, Route } from 'react-router-dom';
 
 
 function App() {
   return (
     <>
-      <Header />
       <Switch>
         <Route exact path="/">
           <Home />
+        </Route>
+        <Route exact path="/game">
+          <Game />
         </Route>
       </Switch>
     </>
