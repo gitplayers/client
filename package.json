@@ -2,7 +2,7 @@
   "name": "client-2",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "dev": "webpack-cli serve --mode development --config config/webpack.config.dev.js",
     "build": "webpack --config config/webpack.config.production.js",
