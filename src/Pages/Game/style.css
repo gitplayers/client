@@ -2,3 +2,7 @@ canvas {
     background-color: darkGray;
     height: 200px;
 }
+
+#modal {
+    display: none;
+}
