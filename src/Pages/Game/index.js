@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 // import { QuestionModal } from '../../Components';
-import { Character, Obstacle } from '../../GameComponents';
+import { Character, Obstacle, Scoreboard } from '../../GameComponents';
 import './style.css';
 
 const Game = () => {
@@ -17,6 +17,7 @@ const Game = () => {
         const context = canvas.getContext('2d');
         const character = new Character(context, canvas);
         const obstacle = new Obstacle(context, canvas);
+        const scoreboard = new Scoreboard(context, canvas)
 
         window.addEventListener("keydown", (e) =>  {
             const direction = e.code.replace('Arrow', '');
@@ -31,11 +32,18 @@ const Game = () => {
                 character.update();
                 obstacle.display();
                 obstacle.update();
+                scoreboard.display();
+                scoreboard.update();
     
                 if(((obstacle.x + obstacle.width > character.x && obstacle.x + obstacle.width < character.x + character.width) ||
                     (obstacle.x > character.x && obstacle.x < character.x + character.width))
                 && (character.y <= canvas.height - (character.height)) && (character.y > canvas.height - (character.height + obstacle.height))){
                     console.log('colision!')
+                    if (scoreboard.score > 100){
+                        scoreboard.score -= 100;
+                    } else {
+                        scoreboard.score = 0;
+                    }
                 }
             }
 
