@@ -31,7 +31,8 @@ const Game = () => {
                 obstacle.display();
                 obstacle.update();
 
-                if((obstacle.x < character.x && obstacle.x < character.x + character.width) 
+                if(((obstacle.x + obstacle.width > character.x && obstacle.x + obstacle.width < character.x + character.width) ||
+                    (obstacle.x > character.x && obstacle.x < character.x + character.width))
                 && (character.y <= canvas.height - (character.height)) && (character.y > canvas.height - (character.height + obstacle.height))){
                     console.log('colision!')
                 }
