@@ -5,7 +5,7 @@ import './style.css';
 
 const Game = () => {
 
-    const [ gameInProgress, setGameInProgress ] = useState(false)
+    const [ gameInProgress, setGameInProgress ] = useState(true)
     const speed = 20;
     const canvasRef = useRef(null);
 
@@ -17,31 +17,33 @@ const Game = () => {
 
         const canvas = canvasRef.current;
         const context = canvas.getContext('2d');
-        const character = new Character(context);
-        const obstacle = new Obstacle(context);
+        const character = new Character(context, canvas);
+        const obstacle = new Obstacle(context, canvas);
         window.addEventListener("keydown", (e) =>  {
             const direction = e.code.replace('Arrow', '');
-            console.log(direction);
             character.verticalMovement(direction);
         })
-        window.setInterval(() => {
-            context.clearRect(0, 0 , canvas.width, canvas.height);
-            character.display();
-            character.update();
-            obstacle.display();
-            obstacle.update();
-            
-            if((character.x < obstacle.x && obstacle.x < character.x+character.width)&&(character.y <= 130 && character.y > 110)){
-                console.log('colision!')
-            }
-    
-    
-        }, 1000/speed);
         if (gameInProgress){
             window.setInterval(() => {
-                setGameState(false);
-            }, 10000)
+                context.clearRect(0, 0 , canvas.width, canvas.height);
+                character.display();
+                character.update();
+                obstacle.display();
+                obstacle.update();
+
+                if((obstacle.x < character.x && obstacle.x < character.x + character.width) 
+                && (character.y <= canvas.height - (character.height)) && (character.y > canvas.height - (character.height + obstacle.height))){
+                    console.log('colision!')
+                }
+        
+        
+            }, 1000/speed);
         }
+        // if (gameInProgress){
+        //     window.setInterval(() => {
+        //         setGameInProgress(false);
+        //     }, 10000)
+        // }
 
     })
     return ( 
