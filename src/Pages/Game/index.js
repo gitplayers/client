@@ -1,10 +1,18 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
+import { QuestionModal } from '../../Components';
 import { Character } from '../../GameComponents';
 import './style.css';
 
 const Game = () => {
+
+    const [ gameInProgress, setGameInProgress ] = useState(false)
     const speed = 20;
     const canvasRef = useRef(null);
+
+    useEffect(() => {
+        console.log(gameInProgress);
+    }, [gameInProgress])
+
     useEffect(() => {
 
         const canvas = canvasRef.current;
@@ -22,6 +30,12 @@ const Game = () => {
     
     
         }, 1000/speed);
+        if (gameInProgress){
+            window.setInterval(() => {
+                setGameState(false);
+            }, 10000)
+        }
+
     })
     return ( 
         <div>
