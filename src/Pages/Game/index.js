@@ -1,8 +1,11 @@
 import React, { useRef, useEffect, useState } from 'react';
 // import { QuestionModal } from '../../Components';
 import { Character, Obstacle, Scoreboard } from '../../GameComponents';
+import { shuffle } from '../../Helpers';
 import './style.css';
+
 let gameInProgress = true;
+let scoreMultiplier = 1;
 
 const Game = () => {
 
@@ -45,7 +48,7 @@ const Game = () => {
                 obstacle.display();
                 obstacle.update();
                 scoreboard.display();
-                scoreboard.update();
+                scoreboard.update(scoreMultiplier);
     
                 if(((obstacle.x + obstacle.width > character.x && obstacle.x + obstacle.width < character.x + character.width) ||
                     (obstacle.x > character.x && obstacle.x < character.x + character.width))
@@ -71,7 +74,6 @@ const Game = () => {
 
     const resetTimeout = () => {
         if (gameInProgress){
-            console.log('setting question timeout');
             window.setTimeout(() => {
                 toggleGameState()
             }, questionDelay)
@@ -89,46 +91,45 @@ const Game = () => {
     }
 
     const toggleGameState = () => {
-        console.log('initially')
-        console.log(gameInProgress); 
         if (gameInProgress){
             gameInProgress = false;
         } else {
             gameInProgress = true;
         }
-        console.log('after')
-        console.log(gameInProgress);
         toggleModal()
         resetTimeout()
 
     }
 
-    function shuffle(array) {
-        var currentIndex = array.length,  randomIndex;
-        while (currentIndex != 0) {
-          randomIndex = Math.floor(Math.random() * currentIndex);
-          currentIndex--;
-          [array[currentIndex], array[randomIndex]] = [
-            array[randomIndex], array[currentIndex]];
-        }
-        return array;
-    }
-
     const removeQuestion = () => {
-        console.log(questions)
         setQuestions((prevQuestions) => {
             let newQuestions = prevQuestions.slice(1)
             return newQuestions;
         })
     }
 
+    const questionCorrect = () => {
+        scoreMultiplier += 0.1;
+    }
+
+    const questionIncorrect = () => {
+        if (scoreMultiplier > 1){
+            scoreMultiplier -= 0.1;
+        }
+    }
+
     const renderButtons = () => {
         let allAnswers = questions[0].incorrect_answers;
         allAnswers.push(questions[0].correct_answer);
         shuffle(allAnswers);
-        return allAnswers.map(a => {
+        return allAnswers.map((a, i) => {
             return (
-                <button onClick={() => {
+                <button key={i} onClick={() => {
+                    if (a === questions[0].correct_answer){
+                        questionCorrect();
+                    } else {
+                        questionIncorrect();
+                    }
                     toggleGameState()
                     removeQuestion()
                 }}>{a}</button>
@@ -138,8 +139,6 @@ const Game = () => {
 
 
     const renderCurrentQuestion = () => {
-        console.log('renderattempt')
-        console.log(questions);
         if (questions[0]){
             return (
                 <section>
