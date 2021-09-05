@@ -161,13 +161,12 @@ const Game = () => {
     }
 
     return ( 
-        <main>
-            <h1>Game</h1>
+        <div>
             <canvas ref={canvasRef}></canvas>
             <div id="modal" ref={modalRef}>
                 {renderForm()}
             </div>
-        </main> 
+        </div> 
     );
 }
  
