@@ -3,7 +3,6 @@ import { Game } from '../../Components';
 
 const GamePage = () => {
 
-
     return ( 
         <main>
             <h1>Game</h1>
