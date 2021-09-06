@@ -16,12 +16,12 @@ const Game = () => {
     const modalRef = useRef(null);
 
     useEffect(() => {
-    let mockQuestions = [
-        {question: "What is my name?", incorrect_answers: [ "Romeo", "Beth", "Sergi"], correct_answer: "Zak"},
-        {question: "What is root 4?", incorrect_answers: [ "23", "9", "1"], correct_answer: "2"},
-        {question: "What is root 4?", incorrect_answers: [ "23", "9", "1"], correct_answer: "2"},
-        {question: "What is the name of our lecturer?", incorrect_answers: ["Romeo", "Zak", "Sergi"], correct_answer: "Beth"},
-    ] 
+        let mockQuestions = [
+            {question: "What is my name?", incorrect_answers: [ "Romeo", "Beth", "Sergi"], correct_answer: "Zak"},
+            {question: "What is root 4?", incorrect_answers: [ "23", "9", "1"], correct_answer: "2"},
+            {question: "What is root 4?", incorrect_answers: [ "23", "9", "1"], correct_answer: "2"},
+            {question: "What is the name of our lecturer?", incorrect_answers: ["Romeo", "Zak", "Sergi"], correct_answer: "Beth"},
+        ] 
         setQuestions(mockQuestions)
     }, [])
 
@@ -38,6 +38,7 @@ const Game = () => {
             character.verticalMovement(direction);
         })
 
+        character.sprite_image.src = "../../GameComponents/Character/sprites/test_walk.png"
 
         window.setInterval(() => {
 
@@ -49,7 +50,9 @@ const Game = () => {
                 obstacle.update();
                 scoreboard.display();
                 scoreboard.update(scoreMultiplier);
-    
+
+                character.anim.update_frame();
+   
                 if(((obstacle.x + obstacle.width > character.x && obstacle.x + obstacle.width < character.x + character.width) ||
                     (obstacle.x > character.x && obstacle.x < character.x + character.width))
                 && (character.y <= canvas.height - (character.height)) && (character.y > canvas.height - (character.height + obstacle.height))){
