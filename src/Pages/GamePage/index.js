@@ -1,5 +1,6 @@
 import React from 'react';
 import { Game } from '../../Components';
+import './style.css';
 
 const GamePage = () => {
 
