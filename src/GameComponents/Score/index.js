@@ -2,9 +2,9 @@ class Scoreboard{
     constructor(context, canvas){
         this.canvas = canvas
         this.context = context
-        this.fontSize = 15;
+        this.fontSize = Math.floor(this.canvas.height/10) ;
         this.x = this.canvas.width - this.fontSize;
-        this.y = 15;
+        this.y = this.fontSize;
         this.score = 0;
     }
     
