@@ -1,6 +1,15 @@
 import React from 'react';
 
-const QuestionModal = () => {
+const QuestionModal = ({questions}) => {
+
+    const renderForm = () => {
+        return (
+            <>
+                <h1>Question Modal</h1>
+                {renderCurrentQuestion()}
+            </>
+        )
+    }
 
     return ( 
     <div>
