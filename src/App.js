@@ -1,5 +1,5 @@
 import React from 'react';
-import { Home, GamePage, Welcome } from './Pages';
+import { Home, GamePage, Welcome, Results } from './Pages';
 import { Switch, Route } from 'react-router-dom';
 
 
@@ -10,11 +10,14 @@ function App() {
         <Route exact path="/">
           <Home />
         </Route>
-        <Route path="/game">
+        <Route path="/game/:id">
           <GamePage />
         </Route>
-        <Route path="/wedding">
+        <Route path="/wedding/:wedding_name">
           <Welcome />
+        </Route>
+        <Route path="/results/:id">
+          <Results />
         </Route>
       </Switch>
     </>

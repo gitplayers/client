@@ -1,7 +1,7 @@
 class FloorObstacle {
     constructor(context, canvas){
-        this.height = 20;
-        this.width = 20;
+        this.height = 32;
+        this.width = 32;
         this.xVelocity = -10;
         this.context = context;
         this.canvas = canvas;
