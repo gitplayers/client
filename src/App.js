@@ -1,5 +1,5 @@
 import React from 'react';
-import { Home, GamePage, Welcome, Results } from './Pages';
+import { Home, GamePage, Welcome, Results, NotFound } from './Pages';
 import { Switch, Route } from 'react-router-dom';
 
 
@@ -19,6 +19,9 @@ function App() {
         <Route path="/results/:id">
           <Results />
         </Route>
+        <Route path="/">
+					<NotFound />
+				</Route>
       </Switch>
     </>
   );
