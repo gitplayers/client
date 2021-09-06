@@ -41,7 +41,8 @@ const Game = () => {
                 const direction = e.code.replace('Arrow', '');
                 character.verticalMovement(direction);
             })
-    
+
+            character.sprite_image.src = "../../GameComponents/Character/sprites/test_walk.png"
     
             window.setInterval(() => {
     
@@ -56,6 +57,8 @@ const Game = () => {
                     scoreboard.display(scoreMultiplier);
                     scoreboard.update(scoreMultiplier);
                     
+                    character.anim.update_frame();
+
                     if(((floorObstacle.x + floorObstacle.width > character.x && floorObstacle.x + floorObstacle.width < character.x + character.width) ||
                         (floorObstacle.x > character.x && floorObstacle.x < character.x + character.width))
                     && (character.y <= canvas.height - (character.height)) && (character.y > canvas.height - (character.height + floorObstacle.height))){
