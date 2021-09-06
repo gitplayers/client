@@ -1,6 +1,7 @@
 canvas {
     background-color: darkGray;
-    height: 200px;
+    height: 400px;
+    width: 800px;
 }
 
 #modal {
