@@ -8,7 +8,7 @@ class Scoreboard{
         this.score = 0;
     }
     
-    display(){
+    display(scoreMultiplier){
         if (this.score >= 9 && this.score <= 99){
             this.x = this.canvas.width - this.fontSize*1.5;
         } else if (this.score >= 99 && this.score <= 999){
@@ -20,6 +20,7 @@ class Scoreboard{
         }
         this.context.font = `${this.fontSize}px Arial`
         this.context.fillText(Math.floor(this.score), this.x, this.y);
+        this.context.fillText(scoreMultiplier.toFixed(1), 0, this.fontSize);
 
     }
 

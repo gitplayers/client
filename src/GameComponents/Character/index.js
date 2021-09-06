@@ -30,9 +30,10 @@ class Character {
     }
 
     display(){
-    
+
         this.context.fillStyle = "#FFFFFF";
         this.context.fillRect(this.x, this.y, this.width, this.height);
+        
     }
 
     verticalMovement(direction){

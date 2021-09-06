@@ -49,12 +49,11 @@ const Game = () => {
                     context.clearRect(0, 0, canvas.width, canvas.height);
                     character.display();
                     character.update();
-                    //want to display and update either the floor obstacle or the duck obstacle
                     floorObstacle.display();
                     floorObstacle.update();
                     duckObstacle.display();
                     duckObstacle.update();
-                    scoreboard.display();
+                    scoreboard.display(scoreMultiplier);
                     scoreboard.update(scoreMultiplier);
                     
                     if(((floorObstacle.x + floorObstacle.width > character.x && floorObstacle.x + floorObstacle.width < character.x + character.width) ||
