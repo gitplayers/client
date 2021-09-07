@@ -4,7 +4,7 @@ import "./style.css";
 const Header = () => {
 	return (
 		<section role="logo" className="header">
-            <h1>Logo</h1>
+            <img src="../../Assets/logo.png"></img>
 		</section>
 	);
 };

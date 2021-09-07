@@ -1,5 +1,5 @@
 #invite {
-    border: 1px solid black;
+    border: 2px solid #A3B4C8;
     width: 55vw;
     height: 65vh;
     margin: 2% auto 0 auto;
@@ -23,7 +23,7 @@
 }
 
 #text {
-    border-right: 1px solid black;
+    border-right: 2px solid #A3B4C8;
     height: 90%;
     margin-top: 2%;
     width: 70%;

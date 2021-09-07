@@ -36,28 +36,36 @@ describe ('update frame_set check', () => {
     })
 })
 
-// describe ('character functions', () => {
+describe ('character functions', () => {
 
-//     beforeEach(() => {
+    test('character update increases y position by y velocity', () => {
+        let canvas = document.createElement('canvas');
+        canvas.height = "400px"
+        let context = canvas.getContext('2d');
+        let character =  new Character(context, canvas);
+        character.yVelocity = 10
+        let initialY = character.y;
+        character.update();
+        expect(character.y).toBe(initialY + 10);
+    })
 
-// 	});
+    test('update vertical movement functions based on space press', () => {
+        let canvas = document.createElement('canvas');
+        canvas.height = "400px"
+        let context = canvas.getContext('2d');
+        let character =  new Character(context, canvas);    
+        character.verticalMovement('Space');
+        expect(character.yVelocity).not.toBe(0);
+    })
 
-//     // test('character update increases y position by y velocity', () => {
-//     //     character.canvas = <canvas height="400" width="400"></canvas>
-//     //     character.yVelocity = 10
-//     //     let initialY = character.y;
-//     //     character.update();
-//     //     expect(character.y).toBe(initialY + 10);
-//     // })
-
-//     test('update vertical movement functions based on key press', () => {
-// 		let character =  new Character;
-//         character.canvas = document.createElement('canvas');     
-//         character.verticalMovement('Space');
-//         expect(character.yVelocity).not.toBe(0);
-//         character.verticalMovement('Down');
-//         expect(character.duckVelocity).not.toBe(0);
-//     })
+    test('update vertical movement functions based on space press', () => {
+        let canvas = document.createElement('canvas');
+        canvas.height = "400px"
+        let context = canvas.getContext('2d');
+        let character =  new Character(context, canvas);    
+        character.verticalMovement('Down');
+        expect(character.duckVelocity).not.toBe(0);
+    })
 
 
-// })
+})

@@ -243,9 +243,14 @@ const Game = () => {
                 <div>
                     <h1 className="questionTitle">Time is up! Game over!</h1>
                     <h2>Your score was: {(currentScore - 1*scoreMultiplier).toFixed(0)}</h2>
+                    <h2>Input your name and submit your score to see where you placed on the leaderboards!</h2>
                     <form onSubmit={gameEnd}>
-                        <input id="name" type="text" placeholder="Your name goes here"/>
-                        <input type="submit" />
+                        <div id="inputDiv">
+                            <input id="name" type="text" placeholder="Your name goes here"/>
+                        </div>
+                        <div id="submitDiv">
+                            <input id="submitBtn" type="submit" />
+                        </div>
                     </form>
                 </div>
             )

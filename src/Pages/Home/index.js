@@ -10,9 +10,12 @@ const Home = () => {
                 <h2>Do you want to test your friends and family's knowledge about you and your partner?</h2>
             </div>
             <div>
-                <h1>Welcome to placeholder!</h1>
+                <h1>Welcome to Gamevitation!</h1>
             </div>
-            <h3>We have created a bespoke service where you can create a custom game to share with your friends and family!</h3>
+            <div>
+                <img src="../../Assets/logo.png"></img>
+            </div>
+            <h3>We have created a bespoke wedding invitation service where you can create a custom game to share with your friends and family!</h3>
             <div className="stepDiv">
                 <h2>Step 1</h2>
             </div>
