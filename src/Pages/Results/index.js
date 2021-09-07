@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useParams, useHistory } from 'react-router-dom';
 import { useWedding } from "../../Context/WeddingContext";
 import { decideErrorMessage } from "../../Helpers";
+import "./style.css";
 const BASE_URL = "https://gamein-vitation.herokuapp.com";
 const Results = () => {
 
@@ -32,9 +33,6 @@ const Results = () => {
                 setSide1Scores(side1.data.scores);
                 setSide2Scores(side2.data.scores);
             }
-
-            // console.log(data.scores);
-            // setScores(data.scores);
         }
         fetchScores();
         setLoading(false);
@@ -53,10 +51,11 @@ const Results = () => {
         })
         return sortedScores.map((score,i) => {
             return (
-                <section key={i}>
-                    <p>{score.name}</p>
-                    <p>{score.score}</p>
-                </section>
+                <tr key={i}>
+                    <td>{i + 1}</td>
+                    <td>{score.name}</td>
+                    <td>{score.score}</td>
+			    </tr>
             )
         })
     }
@@ -73,8 +72,17 @@ const Results = () => {
             <div>
                 <button onClick={renderInvitePage}>See my invite!!</button>
                 <h1>Results</h1>
-                <section> 
-                    {renderTotalResults()}
+                <section>
+                    <table className="resultsTable">
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Guest Name</th>
+                            <th>Score</th>
+                        </tr>
+                    </thead>
+                    <tbody>{renderTotalResults()}</tbody>
+                    </table> 
                 </section>
             </div>
             }
