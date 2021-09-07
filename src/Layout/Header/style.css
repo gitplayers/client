@@ -1,7 +1,7 @@
 .header {
     display: flex;
     justify-content: flex-start;
-    background-color: rgb(216, 214, 214);
+    background-color: #A3B4C8;
 }
 
 .header h1{
