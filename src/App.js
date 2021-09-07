@@ -2,10 +2,12 @@ import React from 'react';
 import { Home, GamePage, Welcome, Results, NotFound, Invite } from './Pages';
 import { Switch, Route } from 'react-router-dom';
 import { WeddingProvider } from './Context/WeddingContext';
-
+import { Header } from './Layout';
+import './style.css';
 function App() {
   return (
     <WeddingProvider>
+      <Header />
       <Switch>
         <Route exact path="/">
           <Home />

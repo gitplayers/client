@@ -1,0 +1,43 @@
+#invite {
+    border: 1px solid black;
+    width: 55vw;
+    height: 65vh;
+    margin: 2% auto 0 auto;
+}
+
+#invite h1 {
+    text-align: left;
+    margin-left: 5%;
+    font-size: 3.6rem;
+}
+
+#invite p {
+    text-align: left;
+    font-size: 2rem;
+    text-decoration: underline;
+}
+
+#invite section {
+    width: 90%;
+    margin-left: 5%;
+}
+
+#text {
+    border-right: 1px solid black;
+    height: 90%;
+    margin-top: 2%;
+    width: 70%;
+}
+
+#stamp {
+    position: relative;
+    bottom: 90%;
+    left: 83%;
+    height: 20%;
+    width: 15%;
+}
+
+#stamp img {
+    height: 100%;
+    width: 100%;
+}

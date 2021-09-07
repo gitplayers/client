@@ -1,0 +1,21 @@
+main {
+    margin: 0 auto;
+    width: 60vw;
+}
+
+#side1 {
+    margin-right: 5%;
+}
+
+#side1, #side2 {
+    height: 40vh;
+    width: 45%;
+    display: inline-block;
+    margin-bottom: 5vh;
+}
+
+#side1ImageDiv, #side2ImageDiv {
+    border: 1px solid black;
+    height: 90%;
+    margin-bottom: 3%;
+}

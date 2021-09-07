@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useWedding } from "../../Context/WeddingContext";
 import { decideErrorMessage } from "../../Helpers";
+import "./style.css";
 const Invite = () => {
 
     const { wedding_name } = useParams();
@@ -19,7 +20,6 @@ const Invite = () => {
                     setError(message);
                 }
             } else {
-                console.log(weddingData.invitation);
                 setInvitationData(weddingData.invitation);
             }
         }
@@ -27,14 +27,40 @@ const Invite = () => {
         setLoading(false);
     }, [weddingData])
 
+    const renderInvitationMessage = () => {
+        if (invitationData.message){
+            let message = invitationData.message.slice(0)
+            console.log(message);
+            for (let i = 0; i<(1000-message.length); i++){
+                message = message + " .";
+            }
+            console.log(message);
+            // while (message.length < 400){
+            //     message = message + "";
+            // }
+            return (<p>{message}</p>)
+        }
+    }
+
+    const sendRSVP = () => {
+        //email to host
+    }
+
     return (
         <> {error === "" ? 
             <>
                 {loading ? <h1>Loading..</h1> : 
-                <div>
-                    <h1>Invite</h1>
-                    <h2>{invitationData.title}</h2>
-                    <p>{invitationData.message}</p> 
+                <div id="invite">
+                    <div id="text">
+                        <h1>{invitationData.title}</h1>
+                        <section>
+                            {renderInvitationMessage()} 
+                        </section>
+                        <button onClick={sendRSVP}>RSVP</button>
+                    </div>
+                    <div id="stamp">
+                        <img src="https://shop.royalmail.com/media/catalog/product/cache/3541af23d7a0b2cd4fd132ad21fe3039/d/s/ds1033a-1-machin-definitives-garnet-red_1.jpg"></img>
+                    </div>
                 </div>
                 }
             </>

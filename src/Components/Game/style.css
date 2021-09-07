@@ -1,9 +1,46 @@
 canvas {
+    margin-top: 10%;
     background-color: darkGray;
-    height: 400px;
-    width: 800px;
+    height: 60vh;
+    width: 60vw;
 }
 
+
 #modal {
+    position: absolute;
+    top: 25vh;
+    left: 28vw;
+    width: 45vw;
+    height: 40vh;
+    background-color: white;
     display: none;
+    border: 1px solid black;
+}
+
+.buttonSection {
+    width: 45%;
+    display: inline-block;
+    margin: 2% 1%;
+}
+
+#optionButton {
+    font-size: 1.2rem;
+    width: 80%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 5px;
+}
+
+#optionButton:hover {
+    transform: scale(1.1);
+    background-color: darkgray;
+}
+
+progress {
+    margin-top: 15px;
+    width: 40%;
+}
+
+.questionTitle {
+    margin-top:7%;
 }

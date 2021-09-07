@@ -1,0 +1,7 @@
+.stepDiv {
+    height: 20vw;
+    width: 25vw;
+    border: 1px solid black;
+    display: inline-block;
+    margin: 2px;
+}
