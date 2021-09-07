@@ -230,7 +230,7 @@ const Game = () => {
             let filteredQuestion = questions[0].question.replaceAll('{{user}}', gameHost);
             return (
                 <section>
-                    <h1>{filteredQuestion}</h1>
+                    <h1 className="questionTitle">{filteredQuestion}</h1>
                     {renderButtons()}
                     {renderProgressBar()}
                 </section>
@@ -241,10 +241,10 @@ const Game = () => {
             }
             return (
                 <div>
-                    <h1>Game is over</h1>
+                    <h1 className="questionTitle">Time is up! Game over!</h1>
                     <h2>Your score was: {(currentScore - 1*scoreMultiplier).toFixed(0)}</h2>
                     <form onSubmit={gameEnd}>
-                        <input id="name" type="text" />
+                        <input id="name" type="text" placeholder="Your name goes here"/>
                         <input type="submit" />
                     </form>
                 </div>
@@ -256,26 +256,18 @@ const Game = () => {
         return (<progress value={progressValue} max="100"></progress>)
     }
 
-    const renderForm = () => {
-        return (
-            <>
-                <h1>Question Modal</h1>
-                {renderCurrentQuestion()}
-                
-            </>
-        )
-    }
-
     return (
         <>
         {error === "" ? <>
             {loading ? <h3>loading..</h3> : 
-            <div>
-                <canvas ref={canvasRef}></canvas>
+            <main>
+                <div id="canvas">
+                    <canvas ref={canvasRef}></canvas>
+                </div> 
                 <div id="modal" ref={modalRef}>
-                    {renderForm()}
+                    {renderCurrentQuestion()}
                 </div>
-            </div> 
+            </main>
             } </>: <h3>{error}</h3>} 
         </>
     );

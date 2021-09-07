@@ -19,7 +19,7 @@ class Scoreboard{
             this.x = this.canvas.width - this.fontSize*3;
         }
         this.context.font = `${this.fontSize}px Arial`
-        this.context.fillText(Math.floor(this.score), this.x, this.y);
+        this.context.fillText((this.score.toFixed(0)), this.x, this.y);
         this.context.fillText(scoreMultiplier.toFixed(1), 0, this.fontSize);
 
     }
