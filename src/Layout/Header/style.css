@@ -4,6 +4,7 @@
     background-color: #A3B4C8;
 }
 
-.header h1{
-    padding: 0px 10px;
+.header img{
+    padding: 10px;
+    height: 6vh;
 }
