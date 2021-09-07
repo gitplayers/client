@@ -20,7 +20,7 @@
 
 .resultRow {
     padding: 5px 0px;
-    border-top: 1px solid black;
+    border-top: 1px solid #F3D9C2;
 }
 
 #selectDiv {
@@ -45,7 +45,7 @@
     vertical-align: top;
 }
 
-canvas {
+#canvasDiv canvas {
     margin-top: 0;
     vertical-align: top;
     width: 100%;

@@ -17,6 +17,16 @@ canvas {
     border: 1px solid black;
 }
 
+#modal #inputDiv {
+    margin-bottom: 2%;
+}
+
+
+#submitBtn:hover {
+    transform: scale(1.1);
+    background-color: darkgray;
+}
+
 .buttonSection {
     width: 45%;
     display: inline-block;
