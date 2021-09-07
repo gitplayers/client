@@ -6,9 +6,9 @@ describe('Invite Tests', () => {
 		renderWithProviders(<Invite />);
 	});
     
-	test('Renders 2 headings', () => {
-		let headings = screen.getAllByRole('heading');
-		expect(headings).toHaveLength(2);
+	test('Renders a heading', () => {
+		let heading = screen.getAllByRole('heading');
+		expect(heading).toHaveLength(1);
 	});
 
 
