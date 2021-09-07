@@ -6,8 +6,8 @@ class Character {
         this.duckSpeed = 5;
         // this.height = 20;
         // this.width = 20;
-        this.height = 48;
-        this.width = 49;
+        this.height = 32;
+        this.width = 32;
         this.yVelocity = 0;
         this.duckVelocity = 0;
         this.context = context;
@@ -39,7 +39,7 @@ class Character {
     }
 
     display(){
-    
+
         this.context.fillStyle = "#FFFFFF";
         this.context.drawImage(this.sprite_image, this.anim.frame_index * this.width, 0, this.width, this.height, 20, this.y, this.width, this.height)
         
