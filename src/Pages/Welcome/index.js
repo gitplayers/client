@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { useWedding } from "../../Context/WeddingContext";
+import { decideErrorMessage } from "../../Helpers";
 const Welcome = () => {
 
     const { weddingFetch } = useWedding();
@@ -9,17 +10,6 @@ const Welcome = () => {
     const [ playerNames, setPlayerNames ] = useState([]);
     const [ gameIds, setGameIds ] = useState([])
     const [ loading, setLoading ] = useState(true);
-
-    const decideErrorMessage = (error) => {
-        switch(error){
-            case 404:
-                return "It looks like we couldn't find that wedding name... The link may have expired, or maybe there is a typo in the link name."
-            case 500:
-                return "It looks like there's been an error with the server... Wait a while and refresh to try again."
-            default:
-                return "There's been an error..."
-        }
-    }
 
     useEffect(() => {
         const retrieveWeddingData = async () => {

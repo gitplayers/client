@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from 'axios';
 import { useParams, useHistory } from 'react-router-dom';
 import { useWedding } from "../../Context/WeddingContext";
+import { decideErrorMessage } from "../../Helpers";
 const BASE_URL = "https://gamein-vitation.herokuapp.com";
 const Results = () => {
 
@@ -11,13 +12,18 @@ const Results = () => {
     const [ allScores, setAllScores ] = useState([]);
     const [ side1Scores, setSide1Scores ] = useState([]);
     const [ side2Scores, setSide2Scores ] = useState([]);
+    const [ error, setError ] = useState("");
     const [ loading, setLoading ] = useState(true);
 
     useEffect(() => {
         const fetchScores = async () => {
             console.log(weddingData);
             if (Object.keys(weddingData).length === 0){
-                await weddingFetch(wedding_name);
+                let results = await weddingFetch(wedding_name);
+                if (!results.side1){
+                    let message = decideErrorMessage(results.response.status)
+                    setError(message);
+                }
             } else {
                 let side1 = await axios.get(`${BASE_URL}/json/${weddingData.side1.id}/scores`);
                 let side2 = await axios.get(`${BASE_URL}/json/${weddingData.side2.id}/scores`);
@@ -61,15 +67,20 @@ const Results = () => {
 
     return (
         <>
-        {loading ? <h1>loading..</h1> :        
-        <div>
-            <button onClick={renderInvitePage}>See my invite!!</button>
-            <h1>Results</h1>
-            <section> 
-                {renderTotalResults()}
-            </section>
-        </div>
-        }
+        {error === "" ? 
+        <>
+            {loading ? <h1>loading..</h1> :        
+            <div>
+                <button onClick={renderInvitePage}>See my invite!!</button>
+                <h1>Results</h1>
+                <section> 
+                    {renderTotalResults()}
+                </section>
+            </div>
+            }
+        </>
+        : <h3>{error}</h3>}
+
         </> 
     
     );
