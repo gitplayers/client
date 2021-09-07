@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
-import { useParams } from 'react-router-dom';
-import axios from 'axios';
-const BASE_URL = "https://gamein-vitation.herokuapp.com";
+import { useHistory, useParams } from "react-router-dom";
+import { useWedding } from "../../Context/WeddingContext";
 const Welcome = () => {
 
+    const { weddingFetch } = useWedding();
     const { wedding_name } = useParams();
     const [ error, setError ] = useState("");
     const [ playerNames, setPlayerNames ] = useState([]);
@@ -23,24 +22,23 @@ const Welcome = () => {
     }
 
     useEffect(() => {
-        //fetch
-        const fetchWeddingData = async () => {
-            try {
+        const retrieveWeddingData = async () => {
+            let data = await weddingFetch(wedding_name);
+            if (data.side1){
                 let players = [];
                 let ids = [];
-                let { data } = await axios.get(`${BASE_URL}/json/${wedding_name}/`)
                 players.push(data.side1.character.name);
                 players.push(data.side2.character.name);
                 setPlayerNames(players);
                 ids.push(data.side1.id);
                 ids.push(data.side2.id);
                 setGameIds(ids);
-            } catch (err) {
-                let message = decideErrorMessage(err.response.status);
+            } else {
+                let message = decideErrorMessage(data.response.status);
                 setError(message);
             }
         }
-        fetchWeddingData();
+        retrieveWeddingData();
         setLoading(false);
     }, [])
 
