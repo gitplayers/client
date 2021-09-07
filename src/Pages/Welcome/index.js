@@ -51,6 +51,10 @@ const Welcome = () => {
     const startSide2Game = () => {
         push(`/game/${gameIds[1]}`);
     }
+    
+    const skipToInvite = () => {
+        push(`/invite/${wedding_name}`);
+    }
 
     return (
         <>
@@ -66,6 +70,7 @@ const Welcome = () => {
                 <div>
                     <button onClick={startSide1Game}>I'm on {playerNames[0]}'s side!</button>
                     <button onClick={startSide2Game}>I'm on {playerNames[1]}'s side!</button>
+                    <button onClick={skipToInvite}>Just take me to the invite please..</button>
                 </div>
                 </>
             }
