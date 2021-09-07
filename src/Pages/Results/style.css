@@ -1,7 +1,37 @@
-.resultsTable {
+#table {
+    width: 40vw;
     margin: 0 auto;
+    max-height: 50vh;
+    overflow-y: auto;
+    
+}
+
+.resultsTable {
+    width: 35vw;
+    margin: 10px auto;
+    border-collapse: separate;
+    border-spacing: 0;
 }
 
 .resultsTable th {
     padding: 5px 40px;
+    margin: 0;
+}
+
+.resultRow {
+    padding: 5px 0px;
+    border-top: 1px solid black;
+}
+
+#selectDiv {
+    margin-bottom: 1vh;
+}
+
+#inviteButtonDiv {
+    margin-top: 2vh;
+}
+
+#resultsSection {
+    width: 50vw;
+    margin: 0 auto;
 }

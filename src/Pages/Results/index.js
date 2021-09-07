@@ -57,10 +57,10 @@ const Results = () => {
         })
         return array.map((score,i) => {
             return (
-                <tr key={i}>
-                    <td>{i + 1}</td>
-                    <td>{score.name}</td>
-                    <td>{score.score}</td>
+                <tr  key={i}>
+                    <td className="resultRow">{i + 1}</td>
+                    <td className="resultRow">{score.name}</td>
+                    <td className="resultRow">{score.score}</td>
 			    </tr>
             )
         })
@@ -106,15 +106,16 @@ const Results = () => {
         {error === "" ? 
         <>
             {loading ? <h1>loading..</h1> :        
-            <div>
-                <button onClick={renderInvitePage}>See my invite!!</button>
+            <div id="resultsSection">
                 <h1>Results</h1>
-                <select onChange={updateSelect} name="results" id="results">
-                    <option value="allResults">All results</option>
-                    <option value={names[0]}>{names[0]}'s side</option>
-                    <option value={names[1]}>{names[1]}'s side</option>
-                </select>
-                <section>
+                <div id="selectDiv">
+                    <select onChange={updateSelect} name="results" id="results">
+                        <option value="allResults">All results</option>
+                        <option value={names[0]}>{names[0]}'s side</option>
+                        <option value={names[1]}>{names[1]}'s side</option>
+                    </select>
+                </div>
+                <section id="table">
                     <table className="resultsTable">
                     <thead>
                         <tr>
@@ -126,6 +127,9 @@ const Results = () => {
                     <tbody>{selectBodyResults()}</tbody>
                     </table> 
                 </section>
+                <div id="inviteButtonDiv">
+                    <button onClick={renderInvitePage}>See my invite!!</button>
+                </div>
             </div>
             }
         </>
