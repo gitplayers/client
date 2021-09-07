@@ -2,8 +2,32 @@ canvas {
     background-color: darkGray;
     height: 400px;
     width: 800px;
+
 }
 
 #modal {
     display: none;
+    border: 1px solid black;
+}
+
+.buttonSection {
+    width: 45%;
+    display: inline-block;
+    margin: 2% 1%;
+}
+
+#optionButton {
+    width: 80%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 5px;
+}
+
+#optionButton:hover {
+    transform: scale(1.1);
+    background-color: darkgray;
+}
+
+progress {
+    margin-bottom: 5px;
 }

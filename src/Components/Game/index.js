@@ -8,16 +8,18 @@ import { useWedding } from "../../Context/WeddingContext";
 const BASE_URL = "https://gamein-vitation.herokuapp.com";
 let gameInProgress = true;
 let scoreMultiplier = 1;
+let progressStream = null;
 const Game = () => {
 
     const { weddingData } = useWedding();
     const { push } = useHistory();
     const { id } = useParams();
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState("");
-    const [questions, setQuestions] = useState([]);
-    const [gameHost, setGameHost] = useState("");
-    const [currentScore, setCurrentScore] = useState(0);
+    const [ loading, setLoading ] = useState(true);
+    const [ error, setError ] = useState("");
+    const [ questions, setQuestions ] = useState([]);
+    const [ gameHost, setGameHost ] = useState("");
+    const [ currentScore, setCurrentScore] = useState(0);
+    const [ progressValue, setProgressValue ] = useState(100);
     const speed = 15;
     const canvasRef = useRef(null); 
     const questionDelay = 1000;
@@ -123,9 +125,25 @@ const Game = () => {
         }
     }
 
+    const updateProgressBar = () => {
+        let timeRemaining = 100;
+        progressStream = window.setInterval(() => {
+            if (timeRemaining > 0){
+                timeRemaining -= 0.5;
+                setProgressValue(timeRemaining);
+            } else {
+                window.clearInterval(progressStream);
+                questionIncorrect();
+                removeQuestion();
+                toggleGameState();
+            }
+        }, 50)
+    }
+
     const toggleModal = () => {
         if (modalRef.current.style.display !== "block"){
             modalRef.current.style.display = "block"
+            updateProgressBar();
         } else {
             modalRef.current.style.display = "none"
         }
@@ -159,23 +177,36 @@ const Game = () => {
         }
     }
 
-    const renderButtons = () => {
-        let allAnswers = questions[0].incorrect_answers.slice(0);
-        allAnswers.push(questions[0].correct_answer);
-        shuffle(allAnswers);
-        return allAnswers.map((a, i) => {
+    const returnMappedButtons = (array) => {
+        return array.map((a, i) => {
             return (
-                <button key={i} onClick={() => {
-                    if (a === questions[0].correct_answer){
-                        questionCorrect();
-                    } else {
-                        questionIncorrect();
-                    }
-                    toggleGameState()
-                    removeQuestion()
-                }}>{a}</button>
+                <section key={i} className="buttonSection">
+                    <button id="optionButton"  onClick={() => {
+                        if (a === questions[0].correct_answer){
+                            questionCorrect();
+                        } else {
+                            questionIncorrect();
+                        }
+                        window.clearInterval(progressStream);
+                        removeQuestion();
+                        toggleGameState();
+                    }}>{a}</button>
+                </section>
             )
         })
+    }
+
+    const renderButtons = () => {
+        if (progressValue === 100){
+            let allAnswers = questions[0].incorrect_answers.slice(0);
+            allAnswers.push(questions[0].correct_answer);
+            shuffle(allAnswers);
+            return returnMappedButtons(allAnswers);
+        } else {
+            let allAnswers = questions[0].incorrect_answers.slice(0);
+            allAnswers.push(questions[0].correct_answer);
+            return returnMappedButtons(allAnswers);
+        }
     }
 
     const gameEnd = async (e) => {
@@ -201,9 +232,13 @@ const Game = () => {
                 <section>
                     <h1>{filteredQuestion}</h1>
                     {renderButtons()}
+                    {renderProgressBar()}
                 </section>
             )
-        } else {
+        } else if (!questions[0] && !loading){
+            if(modalRef.current && modalRef.current.style.display === "block"){
+                window.clearInterval(progressStream);
+            }
             return (
                 <div>
                     <h1>Game is over</h1>
@@ -212,10 +247,13 @@ const Game = () => {
                         <input id="name" type="text" />
                         <input type="submit" />
                     </form>
-                    
                 </div>
             )
         }
+    }
+
+    const renderProgressBar = () => {
+        return (<progress value={progressValue} max="100"></progress>)
     }
 
     const renderForm = () => {
@@ -223,6 +261,7 @@ const Game = () => {
             <>
                 <h1>Question Modal</h1>
                 {renderCurrentQuestion()}
+                
             </>
         )
     }
