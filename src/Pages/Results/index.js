@@ -1,22 +1,80 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef, useMemo } from "react";
 import axios from 'axios';
 import { useParams, useHistory } from 'react-router-dom';
 import { useWedding } from "../../Context/WeddingContext";
 import { decideErrorMessage } from "../../Helpers";
+import { Chart, registerables } from 'chart.js';
+let myChart = null;
+Chart.register(...registerables);
 import "./style.css";
 const BASE_URL = "https://gamein-vitation.herokuapp.com";
 const Results = () => {
 
+    const canvasRef = useRef(null);
     const { push } = useHistory();
     const { wedding_name } = useParams();
     const { weddingData, weddingFetch } = useWedding();
     const [ allScores, setAllScores ] = useState([]);
     const [ side1Scores, setSide1Scores ] = useState([]);
     const [ side2Scores, setSide2Scores ] = useState([]);
+    const [ chartScores, setChartScores ] = useState([]);
     const [ error, setError ] = useState("");
     const [ loading, setLoading ] = useState(true);
     const [ names, setNames ] = useState([]);
     const [ selectValue, setSelectValue ] = useState("allScores");
+
+    // let memoizedresult = useMemo(() => {
+    //     return toManip.map(r => { return r.name })
+    // }, chartScores)
+
+    useEffect(() => {
+        if (!loading){
+            if (myChart){
+                myChart.destroy();
+            }
+            const canvas = canvasRef.current;
+            const context = canvas.getContext('2d');
+            let toManipulate = chartScores.slice(0);
+            let players = toManipulate.map(s => { return s.name });
+            let scores = toManipulate.map(s => { return s.score });
+            myChart = new Chart(context, {
+                type: 'bar',
+                data: {
+                    labels: players,
+                    datasets: [
+                        {
+                            label: '# of Points',
+                            data: scores,
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 206, 86, 0.2)',
+                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(153, 102, 255, 0.2)',
+                                'rgba(255, 159, 64, 0.2)',
+                            ],
+                            borderColor: [
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)',
+                            ],
+                            borderWidth: 1,
+                        },
+                    ],
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                        },
+                    },
+                },
+            });
+        }
+    }, [loading, chartScores])
 
     useEffect(() => {
         const fetchScores = async () => {
@@ -45,6 +103,12 @@ const Results = () => {
         setLoading(false);
     }, [weddingData])
 
+    const retrieveSortedScores = (array) => {
+        if (chartScores[0] !== array[0] || chartScores.length !== array.length){
+            setChartScores(array)
+        }
+    }
+
     const sortAndMapScores = (array) => {
         array.sort((a, b) => {
             if (b.score < a.score) {
@@ -55,6 +119,7 @@ const Results = () => {
             }
             return 0;
         })
+        retrieveSortedScores(array);
         return array.map((score,i) => {
             return (
                 <tr  key={i}>
@@ -67,15 +132,26 @@ const Results = () => {
     }
 
     const renderTotalResults = () => {
-        return sortAndMapScores(allScores.slice(0));
+        if (allScores.slice(0).length > 0){
+            let results = sortAndMapScores(allScores.slice(0));
+            return results;
+        }
     }
 
     const renderSide1Results = () => {
-        return sortAndMapScores(side1Scores.slice(0));
+        if (side1Scores.slice(0).length > 0){
+            let results = sortAndMapScores(side1Scores.slice(0));
+            return results;
+        }
+        // setChartScores(results)
     }
 
     const renderSide2Results = () => {
-        return sortAndMapScores(side2Scores.slice(0));
+        if (side2Scores.slice(0).length > 0){
+            let results = sortAndMapScores(side2Scores.slice(0));
+            return results;
+        }
+        // setChartScores(results)
     }
 
 
@@ -115,18 +191,23 @@ const Results = () => {
                         <option value={names[1]}>{names[1]}'s side</option>
                     </select>
                 </div>
-                <section id="table">
-                    <table className="resultsTable">
-                    <thead>
-                        <tr>
-                            <th>Rank</th>
-                            <th>Guest Name</th>
-                            <th>Score</th>
-                        </tr>
-                    </thead>
-                    <tbody>{selectBodyResults()}</tbody>
-                    </table> 
-                </section>
+                <div id="wholeTable">
+                    <section id="table">
+                        <table className="resultsTable">
+                        <thead>
+                            <tr>
+                                <th>Rank</th>
+                                <th>Guest Name</th>
+                                <th>Score</th>
+                            </tr>
+                        </thead>
+                        <tbody>{selectBodyResults()}</tbody>
+                        </table> 
+                    </section>
+                </div>
+                <div id="canvasDiv">
+                    <canvas ref={canvasRef}></canvas>
+                </div>
                 <div id="inviteButtonDiv">
                     <button onClick={renderInvitePage}>See my invite!!</button>
                 </div>

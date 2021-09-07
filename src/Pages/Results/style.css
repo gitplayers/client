@@ -31,7 +31,24 @@
     margin-top: 2vh;
 }
 
-#resultsSection {
-    width: 50vw;
-    margin: 0 auto;
+
+#wholeTable {
+    width: 45vw;
+    display: inline-block;
+    vertical-align: top;
+}
+
+#canvasDiv {
+    display: inline-block;
+    width: 45vw;
+    height: 50vh;
+    vertical-align: top;
+}
+
+canvas {
+    margin-top: 0;
+    vertical-align: top;
+    width: 100%;
+    background: none;
+    height: 100%;
 }
