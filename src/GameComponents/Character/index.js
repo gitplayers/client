@@ -41,6 +41,7 @@ class Character {
     display(){
 
         this.context.fillStyle = "#FFFFFF";
+        //maybe only draw onload here to fix error
         this.context.drawImage(this.sprite_image, this.anim.frame_index * this.width, 0, this.width, this.height, 20, this.y, this.width, this.height)
         
     }
