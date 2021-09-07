@@ -1,14 +1,14 @@
-import Invite from './index';
+import Home from './index';
 import { screen } from '@testing-library/react';
 
 describe('Invite Tests', () => {
 	beforeEach(() => {
-		renderWithProviders(<Invite />);
+		renderWithProviders(<Home />);
 	});
     
-	test('Renders 2 headings', () => {
+	test('Renders 10 headings', () => {
 		let headings = screen.getAllByRole('heading');
-		expect(headings).toHaveLength(2);
+		expect(headings).toHaveLength(10);
 	});
 
 
