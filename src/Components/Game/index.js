@@ -1,23 +1,26 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { Character, FloorObstacle, Scoreboard, DuckObstacle } from '../../GameComponents';
 import { shuffle } from '../../Helpers';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import './style.css';
 import axios from 'axios';
-
+import { useWedding } from "../../Context/WeddingContext";
 const BASE_URL = "https://gamein-vitation.herokuapp.com";
 let gameInProgress = true;
 let scoreMultiplier = 1;
-
 const Game = () => {
 
+    const { weddingData } = useWedding();
+    const { push } = useHistory();
     const { id } = useParams();
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
-    const [questions, setQuestions] = useState([])
+    const [questions, setQuestions] = useState([]);
+    const [gameHost, setGameHost] = useState("");
+    const [currentScore, setCurrentScore] = useState(0);
     const speed = 15;
     const canvasRef = useRef(null); 
-    const questionDelay = 10000;
+    const questionDelay = 1000;
     const modalRef = useRef(null);
 
     const decideErrorMessage = (error) => {
@@ -32,12 +35,12 @@ const Game = () => {
     }
 
     useEffect(() => {
+        console.log(weddingData);
         const fetchGameData = async () => {
             try {
                 let { data } = await axios.get(`${BASE_URL}/json/${id}/`)
-                console.log(data);
-                console.log(data.questions);
                 setQuestions(data.questions);
+                setGameHost(data.character.name);
             } catch (err) {
                 let message = decideErrorMessage(err.response.status)
                 setError(message);
@@ -45,12 +48,9 @@ const Game = () => {
         }
 
         fetchGameData();
+        setLoading(false);
 
-        if (questions.length > 0){
-            setLoading(false);
-        }
     }, [])
-
 
     useEffect(() => {
         if (!loading){
@@ -80,7 +80,7 @@ const Game = () => {
                     duckObstacle.update();
                     scoreboard.display(scoreMultiplier);
                     scoreboard.update(scoreMultiplier);
-                    
+                    setCurrentScore(scoreboard.score);
                     character.anim.update_frame();
 
                     if(((floorObstacle.x + floorObstacle.width > character.x && floorObstacle.x + floorObstacle.width < character.x + character.width) ||
@@ -160,7 +160,7 @@ const Game = () => {
     }
 
     const renderButtons = () => {
-        let allAnswers = questions[0].incorret_answers;
+        let allAnswers = questions[0].incorrect_answers.slice(0);
         allAnswers.push(questions[0].correct_answer);
         shuffle(allAnswers);
         return allAnswers.map((a, i) => {
@@ -178,12 +178,28 @@ const Game = () => {
         })
     }
 
+    const gameEnd = async (e) => {
+        e.preventDefault();
+        let user = e.target[0].value;
+        if (user){
+            let patchData = [{name: user, score: (currentScore - 1*scoreMultiplier).toFixed(0)}];
+            await axios.patch(`${BASE_URL}/json/${id}/scores/`, {
+                "id": id, "scores": patchData
+            })
+        } else {
+            console.log('input your name please');
+        }
+        
+        push(`/results/${weddingData.wedding_url}`)
+    }
 
     const renderCurrentQuestion = () => {
+
         if (questions[0]){
+            let filteredQuestion = questions[0].question.replaceAll('{{user}}', gameHost);
             return (
                 <section>
-                    <h1>{questions[0].question}</h1>
+                    <h1>{filteredQuestion}</h1>
                     {renderButtons()}
                 </section>
             )
@@ -191,7 +207,12 @@ const Game = () => {
             return (
                 <div>
                     <h1>Game is over</h1>
-                    <button>end game</button>
+                    <h2>Your score was: {(currentScore - 1*scoreMultiplier).toFixed(0)}</h2>
+                    <form onSubmit={gameEnd}>
+                        <input id="name" type="text" />
+                        <input type="submit" />
+                    </form>
+                    
                 </div>
             )
         }

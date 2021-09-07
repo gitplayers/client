@@ -1,5 +1,5 @@
 import React from 'react';
-import { Home, GamePage, Welcome, Results, NotFound } from './Pages';
+import { Home, GamePage, Welcome, Results, NotFound, Invite } from './Pages';
 import { Switch, Route } from 'react-router-dom';
 import { WeddingProvider } from './Context/WeddingContext';
 
@@ -20,7 +20,7 @@ function App() {
           <Results />
         </Route>
         <Route path="/invite/:wedding_name">
-          <Results />
+          <Invite />
         </Route>
         <Route path="/">
 					<NotFound />

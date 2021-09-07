@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { useWedding } from "../../Context/WeddingContext";
 const BASE_URL = "https://gamein-vitation.herokuapp.com";
 const Results = () => {
 
+    const { push } = useHistory();
     const { wedding_name } = useParams();
     const { weddingData, weddingFetch } = useWedding();
     const [ allScores, setAllScores ] = useState([]);
@@ -55,7 +56,7 @@ const Results = () => {
     }
 
     const renderInvitePage = () => {
-        
+        push(`/invite/${wedding_name}`)
     }
 
     return (
