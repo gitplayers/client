@@ -7,8 +7,8 @@ describe('header', () => {
 	});
     
 	test('h1 renders', () => {
-		let canvas = screen.getAllByRole('h1');
-		expect(canvas).toHaveLength(1);
+		let headings = screen.getAllByRole('heading');
+		expect(headings).toHaveLength(3);
 	});
 
 });

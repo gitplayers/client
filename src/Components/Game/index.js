@@ -261,7 +261,7 @@ const Game = () => {
         {error === "" ? <>
             {loading ? <h3>loading..</h3> : 
             <main>
-                <div id="canvas">
+                <div role="canvas" id="canvas">
                     <canvas ref={canvasRef}></canvas>
                 </div> 
                 <div id="modal" ref={modalRef}>
