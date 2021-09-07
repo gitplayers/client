@@ -1,7 +1,7 @@
 import Game from './index';
 import { screen } from '@testing-library/react';
 
-describe('header', () => {
+describe('Game Component Tests', () => {
 	beforeEach(() => {
 		renderWithProviders(<Game />);
 	});

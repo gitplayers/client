@@ -3,7 +3,7 @@ import "./style.css";
 
 const Header = () => {
 	return (
-		<section className="header">
+		<section role="logo" className="header">
             <h1>Logo</h1>
 		</section>
 	);
