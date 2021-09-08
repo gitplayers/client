@@ -5,3 +5,38 @@
     display: inline-block;
     margin: 2px;
 }
+
+.hair, .skin, .dress, .eyes {
+    position: absolute;
+    transform: scale(1.5);
+}
+
+#characterSelect {
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    width: 40vw;
+    height: 50vh;
+}
+
+
+.buttonDiv button {
+    font-size: 1.5rem;
+    border-radius: 20%;
+}
+
+.buttonDiv {
+    margin: 30px 0;
+}
+
+#nextButtons {
+    position: relative;
+    left: 40%;
+}
+
+#prevButtons {
+    position: relative;
+    right: 40%;
+}
