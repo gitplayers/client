@@ -11,7 +11,9 @@ const Welcome = () => {
     const [ playerNames, setPlayerNames ] = useState([]);
     const [ gameIds, setGameIds ] = useState([])
     const [ loading, setLoading ] = useState(true);
-
+    const [ characterSide1Img, setCharacterSide1Img] = useState("");
+    const [ characterSide2Img, setCharacterSide2Img] = useState("");
+    
     useEffect(() => {
         const retrieveWeddingData = async () => {
             let data = await weddingFetch(wedding_name);
@@ -59,13 +61,13 @@ const Welcome = () => {
                 <h2>Select an option below to start the game..</h2>
                 <div id="side1">
                     <div id="side1ImageDiv">
-
+                        <img src={characterSide1Img}></img>
                     </div>
                     <button onClick={startSide1Game}>I'm on {playerNames[0]}'s side!</button>
                 </div>
                 <div id="side2">
                     <div id="side1ImageDiv">
-
+                        <img src={characterSide2Img}></img>
                     </div>
                     <button onClick={startSide2Game}>I'm on {playerNames[1]}'s side!</button>
                 </div>

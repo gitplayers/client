@@ -1,10 +1,11 @@
 import React from 'react';
 import "./style.css";
+import { images } from '../../Helpers';
 
 const Header = () => {
 	return (
 		<section role="logo" className="header">
-            <img src="../../Assets/logo.png"></img>
+            <img src={images['logo.png'].default}></img>
 		</section>
 	);
 };

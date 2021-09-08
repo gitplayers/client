@@ -53,12 +53,12 @@ const Invite = () => {
                 <div id="invite">
                     <div id="text">
                         <h1>{invitationData.title}</h1>
-                        <section>
+                        <section role="message">
                             {renderInvitationMessage()} 
                         </section>
                         <button onClick={sendRSVP}>RSVP</button>
                     </div>
-                    <div id="stamp">
+                    <div role="stamp" id="stamp">
                         <img src="https://shop.royalmail.com/media/catalog/product/cache/3541af23d7a0b2cd4fd132ad21fe3039/d/s/ds1033a-1-machin-definitives-garnet-red_1.jpg"></img>
                     </div>
                 </div>
