@@ -6,11 +6,7 @@ class Character {
         this.duckSpeed = 5;
         // this.height = 20;
         // this.width = 20;
-<<<<<<< HEAD
         this.height = 33;
-=======
-        this.height = 32;
->>>>>>> fb93368243e22ea462cf24f4617c499353e8e4e3
         this.width = 32;
         this.yVelocity = 0;
         this.duckVelocity = 0;
