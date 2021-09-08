@@ -22,7 +22,7 @@ const Game = () => {
     const [ progressValue, setProgressValue ] = useState(100);
     const speed = 15;
     const canvasRef = useRef(null); 
-    const questionDelay = 1000;
+    const questionDelay = 10000;
     const modalRef = useRef(null);
 
     const decideErrorMessage = (error) => {
@@ -75,7 +75,6 @@ const Game = () => {
     
                 if (gameInProgress){
                     context.clearRect(0, 0, canvas.width, canvas.height);
-                    console.log(canvas.height);
                     character.display();
                     character.update();
                     floorObstacle.display();
@@ -99,7 +98,7 @@ const Game = () => {
                     }
                     if(((duckObstacle.x + duckObstacle.width > character.x && duckObstacle.x + duckObstacle.width < character.x + character.width) ||
                     (duckObstacle.x > character.x && duckObstacle.x < character.x + character.width))
-                    && ((character.y <= duckObstacle.y + duckObstacle.height))){
+                    && ((character.duckY <= duckObstacle.y + duckObstacle.height))){
                         console.log('colision!')
                         if (scoreboard.score > 100){
                             scoreboard.score -= 100;
