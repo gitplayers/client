@@ -20,4 +20,13 @@ const decideErrorMessage = (error) => {
     }
 }
 
-export { shuffle, decideErrorMessage }
+function importAll(r) {
+	let images = {};
+	r.keys().map((item, index) => { images[item.replace('./', '')] = r(item); });
+	return images;
+  }
+  
+const images = importAll(require.context('../Assets', false, /\.(png|jpe?g|svg)$/));
+const largeSpriteImages = importAll(require.context('../Components/Game/large sprites', false, /\.(png|jpe?g|svg)$/));
+
+export { shuffle, decideErrorMessage, images, largeSpriteImages }

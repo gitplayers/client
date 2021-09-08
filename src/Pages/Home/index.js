@@ -1,6 +1,6 @@
 import React from 'react';
 import "./style.css";
-
+import { images } from '../../Helpers';
 const Home = () => {
     return (
         <>
@@ -13,7 +13,7 @@ const Home = () => {
                 <h1>Welcome to Gamevitation!</h1>
             </div>
             <div>
-                <img src="../../Assets/logo.png"></img>
+                <img src={images["logo.png"].default}></img>
             </div>
             <h3>We have created a bespoke wedding invitation service where you can create a custom game to share with your friends and family!</h3>
             <div className="stepDiv">

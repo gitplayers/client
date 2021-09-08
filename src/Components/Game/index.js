@@ -58,6 +58,7 @@ const Game = () => {
         if (!loading){
             const canvas = canvasRef.current; 
             const context = canvas.getContext('2d');
+            
             const character = new Character(context, canvas);
             const floorObstacle = new FloorObstacle(context, canvas);
             const duckObstacle = new DuckObstacle(context, canvas);
@@ -97,7 +98,7 @@ const Game = () => {
                     }
                     if(((duckObstacle.x + duckObstacle.width > character.x && duckObstacle.x + duckObstacle.width < character.x + character.width) ||
                     (duckObstacle.x > character.x && duckObstacle.x < character.x + character.width))
-                    && ((character.y <= duckObstacle.y + duckObstacle.height))){
+                    && ((character.duckY <= duckObstacle.y + duckObstacle.height))){
                         console.log('colision!')
                         if (scoreboard.score > 100){
                             scoreboard.score -= 100;
@@ -269,7 +270,7 @@ const Game = () => {
                 <div role="canvas" id="canvas">
                     <canvas ref={canvasRef}></canvas>
                 </div> 
-                <div id="modal" ref={modalRef}>
+                <div role="modal"id="modal" ref={modalRef}>
                     {renderCurrentQuestion()}
                 </div>
             </main>
