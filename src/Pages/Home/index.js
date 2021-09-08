@@ -121,6 +121,10 @@ const Home = () => {
         }
     }
 
+    const forwardToDjango = () => {
+        window.location.assign("");
+    }
+
     return (
         <>
             <div>
@@ -144,7 +148,10 @@ const Home = () => {
             <div className="stepDiv">
                 <h2>Step 3</h2>
             </div>
-            <div>
+            <div id="djangoButton">
+                <button onClick={forwardToDjango}>Register here!</button>
+            </div>
+            <div >
                 <h2>Checkout our game in action here</h2>
             </div>
             <div>

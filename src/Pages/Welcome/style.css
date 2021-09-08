@@ -15,7 +15,6 @@ main {
 }
 
 #side1ImageDiv, #side2ImageDiv {
-    border: 1px solid black;
     height: 90%;
     margin-bottom: 3%;
 }

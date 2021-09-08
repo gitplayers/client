@@ -16,11 +16,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid black;
     width: 40vw;
     height: 50vh;
 }
 
+#djangoButton {
+    margin-top: 1%;
+}
 
 .buttonDiv button {
     font-size: 1.5rem;
