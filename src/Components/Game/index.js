@@ -76,9 +76,7 @@ const Game = () => {
     
                 if (gameInProgress){
                     context.clearRect(0, 0, canvas.width, canvas.height);
-                    character.sprite_image.onload = () => {
-                        character.display();
-                    }
+                    character.display();
                     character.update();
                     floorObstacle.display();
                     floorObstacle.update();
