@@ -11,4 +11,9 @@ describe('Game Component Tests', () => {
 		expect(canvas).toHaveLength(1);
 	});
 
+	test('modal renders, but as display none', () => {
+		let modal = screen.getAllByRole('modal');
+		expect(modal).toHaveLength(1);
+	})
+
 });

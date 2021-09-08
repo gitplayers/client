@@ -270,7 +270,7 @@ const Game = () => {
                 <div role="canvas" id="canvas">
                     <canvas ref={canvasRef}></canvas>
                 </div> 
-                <div id="modal" ref={modalRef}>
+                <div role="modal"id="modal" ref={modalRef}>
                     {renderCurrentQuestion()}
                 </div>
             </main>

@@ -38,31 +38,27 @@ describe ('update frame_set check', () => {
 
 describe ('character functions', () => {
 
+    let character, canvas, context;
+    beforeEach(() => {
+        canvas = document.createElement('canvas');
+        canvas.height = "400px";
+        context = canvas.getContext('2d');
+        character = new Character(context, canvas);
+    })
+
     test('character update increases y position by y velocity', () => {
-        let canvas = document.createElement('canvas');
-        canvas.height = "400px"
-        let context = canvas.getContext('2d');
-        let character =  new Character(context, canvas);
         character.yVelocity = 10
         let initialY = character.y;
         character.update();
         expect(character.y).toBe(initialY + 10);
     })
 
-    test('update vertical movement functions based on space press', () => {
-        let canvas = document.createElement('canvas');
-        canvas.height = "400px"
-        let context = canvas.getContext('2d');
-        let character =  new Character(context, canvas);    
+    test('update vertical movement functions based on space press', () => { 
         character.verticalMovement('Space');
         expect(character.yVelocity).not.toBe(0);
     })
 
     test('update vertical movement functions based on space press', () => {
-        let canvas = document.createElement('canvas');
-        canvas.height = "400px"
-        let context = canvas.getContext('2d');
-        let character =  new Character(context, canvas);    
         character.verticalMovement('Down');
         expect(character.duckVelocity).not.toBe(0);
     })

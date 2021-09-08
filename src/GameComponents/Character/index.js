@@ -13,7 +13,7 @@ class Character {
         this.yVelocity = 0;
         this.duckVelocity = 0;
         this.duckFrames = 0;
-        this.maxDuckFrames = 3;
+        this.maxDuckFrames = 8;
         this.context = context;
         this.canvas = canvas;
         this.x = this.width;
@@ -46,23 +46,24 @@ class Character {
         //when ducking height is actually increasing, so originally we have 150 - 117, or 118, so will go down to 112
         //duckY originally 118, will go up to 124
         //will be 118 120 122 124 124 124 122 120 118
-        if (this.duckY < this.canvas.height - this.duckHeight + (this.duckHeight - this.minDuck)){
+        
+        if ((this.duckY < this.canvas.height - this.duckHeight + (this.duckHeight - this.minDuck)) && (this.duckFrames < this.maxDuckFrames)){
             this.duckY += this.duckVelocity
         } else if ((this.duckY === this.canvas.height - this.duckHeight + (this.duckHeight - this.minDuck)) && (this.duckFrames < this.maxDuckFrames)){
             this.duckFrames += 1;
-        } else if ((this.duckY >= this.canvas.height - this.duckHeight + (this.duckHeight - this.minDuck)) && (this.duckFrames === this.maxDuckFrames)){
+        } else if ((this.duckY > this.canvas.height - this.duckHeight) && (this.duckFrames === this.maxDuckFrames)){
             this.duckY -= this.duckVelocity
         }
-
-        if (this.duckHeight === (this.canvas.height - this.duckHeight) && this.duckVelocity !== 0){
+        if (this.duckY === (this.canvas.height - this.duckHeight) && this.duckVelocity !== 0){
             this.duckVelocity = 0;
+            this.duckFrames = 0;
             console.log("duckVelocity reset")
             //temp fix
             setTimeout(() =>{
                 // console.log("howdy")
                 this.anim.frame_row_index = 0;
                 this.anim.update_frame_set(this.frame_set[0], 5);
-            }, 1750);              
+            }, 450);              
         }
     }
 
@@ -85,7 +86,8 @@ class Character {
             case 'Down':
                 if (this.duckVelocity === 0 && this.yVelocity === 0){
                     this.anim.frame_row_index = 1;
-                    this.anim.update_frame_set(this.frame_set[1], 3);
+                    this.anim.update_frame_set(this.frame_set[1], 2);
+                    console.log('duck press')
                     this.duckVelocity += this.duckSpeed
                 }
                 break;
