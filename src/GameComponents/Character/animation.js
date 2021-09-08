@@ -4,12 +4,13 @@ class Animation{
         this.delay = delay;             //the number of game cycles to wait until the next frame change
         this.frame = 0;                 //the value in the sprite sheet of the sprite/image to display
         this.frame_index = 0;           //The frame's index in the current animation frame set
+        this.frame_row_index = 0
         this.frame_set = frame_set;     //the current animation fram set
     }
 
     // If the current frame set is different to the incomming one, change the frame_set
     update_frame_set(frame_set, delay =1){
-        // console.log(this.frame_set)
+        // console.log(delay)
         // console.log(this.frame_set)
         if(this.frame_set != frame_set){
             // console.log("HOWDY")

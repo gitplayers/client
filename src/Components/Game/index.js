@@ -69,7 +69,7 @@ const Game = () => {
                 character.verticalMovement(direction);
             })
 
-            character.sprite_image.src = "../../GameComponents/Character/sprites/test_walk.png"
+            character.sprite_image.src = "../../GameComponents/Character/sprites/bride_var_1.png"
     
             window.setInterval(() => {
     
