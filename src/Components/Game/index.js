@@ -22,7 +22,7 @@ const Game = () => {
     const [ progressValue, setProgressValue ] = useState(100);
     const speed = 15;
     const canvasRef = useRef(null); 
-    const questionDelay = 1000;
+    const questionDelay = 10000;
     const modalRef = useRef(null);
 
     const decideErrorMessage = (error) => {

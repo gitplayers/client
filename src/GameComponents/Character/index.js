@@ -3,7 +3,7 @@ import  Animation from './animation';
 class Character {
     constructor(context, canvas){
         this.jumpSpeed = 10;
-        this.duckSpeed = 5;
+        this.duckSpeed = 0.1;
         // this.height = 20;
         // this.width = 20;
         this.height = 33;
@@ -24,26 +24,33 @@ class Character {
     }
 
     update(){
+        
         this.y += this.yVelocity
         if (this.y < this.canvas.height - (this.height*3.5)){
             this.yVelocity = -this.yVelocity;
         }
         if (this.y === (this.canvas.height - this.height) && this.yVelocity !== 0){
+            
             this.yVelocity = 0;
             this.anim.frame_row_index = 0;
             this.anim.update_frame_set(this.frame_set[0], 5);
         }
         this.y += this.duckVelocity
-        if (this.y > (this.canvas.height - (this.height)*0.5)){
-            this.duckVelocity = -this.duckVelocity;
+        if (this.y > (this.canvas.height - (this.height)*2)){
+           this.duckVelocity = -this.duckVelocity;
         }
+
+        // console.log(this.y)
+        // console.log(this.canvas.height - this.height)
+        // console.log(this.duckVelocity)
         if (this.y === (this.canvas.height - this.height) && this.duckVelocity !== 0){
             this.duckVelocity = 0;
-            //temp fix
+            // console.log("here")
             setTimeout(() =>{
+                // console.log("howdy")
                 this.anim.frame_row_index = 0;
                 this.anim.update_frame_set(this.frame_set[0], 5);
-            }, 1500);            
+            }, 1750);            
         }
     }
 
@@ -66,12 +73,12 @@ class Character {
             case 'Down':
                 if (this.duckVelocity === 0 && this.yVelocity === 0){
                     this.anim.frame_row_index = 1;
-                    this.anim.update_frame_set(this.frame_set[1], 4);
-                    // this.duckVelocity += this.duckSpeed
+                    this.anim.update_frame_set(this.frame_set[1], 3);
+                    this.duckVelocity += this.duckSpeed
                 }
                 break;
             default:
-                this.anim.update_frame_set(this.frame_set[0], 5);
+                this.anim.update_frame_set(this.frame_set[0], 4);
         }
         // this.anim.update_frame();        
     }
