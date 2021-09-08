@@ -58,6 +58,7 @@ const Game = () => {
         if (!loading){
             const canvas = canvasRef.current; 
             const context = canvas.getContext('2d');
+            
             const character = new Character(context, canvas);
             const floorObstacle = new FloorObstacle(context, canvas);
             const duckObstacle = new DuckObstacle(context, canvas);
@@ -74,6 +75,7 @@ const Game = () => {
     
                 if (gameInProgress){
                     context.clearRect(0, 0, canvas.width, canvas.height);
+                    console.log(canvas.height);
                     character.display();
                     character.update();
                     floorObstacle.display();
