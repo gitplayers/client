@@ -27,5 +27,6 @@ function importAll(r) {
   }
   
 const images = importAll(require.context('../Assets', false, /\.(png|jpe?g|svg)$/));
+const largeSpriteImages = importAll(require.context('../Components/Game/large sprites', false, /\.(png|jpe?g|svg)$/));
 
-export { shuffle, decideErrorMessage, images }
+export { shuffle, decideErrorMessage, images, largeSpriteImages }
