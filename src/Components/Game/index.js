@@ -5,6 +5,7 @@ import { useParams, useHistory } from 'react-router-dom';
 import './style.css';
 import axios from 'axios';
 import { useWedding } from "../../Context/WeddingContext";
+import { spriteImages } from '../../Helpers';
 const BASE_URL = "https://gamein-vitation.herokuapp.com";
 let gameInProgress = true;
 let scoreMultiplier = 1;
@@ -69,7 +70,7 @@ const Game = () => {
                 character.verticalMovement(direction);
             })
 
-            character.sprite_image.src = "../../GameComponents/Character/sprites/bride_var_1.png"
+            character.sprite_image.src = spriteImages["bride_var_1.png"].default;
     
             window.setInterval(() => {
     
