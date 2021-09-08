@@ -57,10 +57,8 @@ class Character {
         if (this.duckY === (this.canvas.height - this.duckHeight) && this.duckVelocity !== 0){
             this.duckVelocity = 0;
             this.duckFrames = 0;
-            console.log("duckVelocity reset")
             //temp fix
             setTimeout(() =>{
-                // console.log("howdy")
                 this.anim.frame_row_index = 0;
                 this.anim.update_frame_set(this.frame_set[0], 5);
             }, 450);              
@@ -87,7 +85,6 @@ class Character {
                 if (this.duckVelocity === 0 && this.yVelocity === 0){
                     this.anim.frame_row_index = 1;
                     this.anim.update_frame_set(this.frame_set[1], 2);
-                    console.log('duck press')
                     this.duckVelocity += this.duckSpeed
                 }
                 break;

@@ -9,7 +9,7 @@ canvas {
 #modal {
     position: absolute;
     top: 25vh;
-    left: 28vw;
+    left: 29vw;
     width: 45vw;
     height: 40vh;
     background-color: white;
@@ -55,6 +55,3 @@ progress {
     margin-top:7%;
 }
 
-.characterHair, .characterSkin, .characterDress, .characterEyes {
-    position: absolute;
-}

@@ -21,6 +21,7 @@ const Game = () => {
     const [ gameHost, setGameHost ] = useState("");
     const [ currentScore, setCurrentScore] = useState(0);
     const [ progressValue, setProgressValue ] = useState(100);
+    const [ chosenSprite, setChosenSprite ] = useState("");
     const speed = 15;
     const canvasRef = useRef(null); 
     const questionDelay = 10000;
@@ -38,7 +39,6 @@ const Game = () => {
     }
 
     useEffect(() => {
-        console.log(weddingData);
         const fetchGameData = async () => {
             try {
                 let { data } = await axios.get(`${BASE_URL}/json/${id}/`)
@@ -53,6 +53,22 @@ const Game = () => {
         fetchGameData();
         setLoading(false);
 
+    }, [])
+
+    useEffect(() => {
+        if (weddingData){
+            let spriteData;
+            if (weddingData.side1.id.toString() === id){
+                spriteData = weddingData.side1.character; 
+            } else {
+                spriteData = weddingData.side2.character;
+            }
+            let chosenSpriteString = `${spriteData.hair_id}${spriteData.skin_id}${spriteData.dress_id}${spriteData.eyes_id}`
+
+        } else {
+            let message = decideErrorMessage(405)
+            setError(message);
+        }
     }, [])
 
     useEffect(() => {
