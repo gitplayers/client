@@ -29,11 +29,13 @@ class Character {
     }
 
     update(){
+        
         this.y += this.yVelocity
         if (this.y < this.canvas.height - (this.height*3.5)){
             this.yVelocity = -this.yVelocity;
         }
         if (this.y === (this.canvas.height - this.height) && this.yVelocity !== 0){
+            
             this.yVelocity = 0;
             this.anim.frame_row_index = 0;
             this.anim.update_frame_set(this.frame_set[0], 5);
@@ -56,10 +58,11 @@ class Character {
             this.duckVelocity = 0;
             console.log("duckVelocity reset")
             //temp fix
-            // setTimeout(() =>{
-            //     this.anim.frame_row_index = 0;
-            //     this.anim.update_frame_set(this.frame_set[0], 5);
-            // }, 1500);            
+            setTimeout(() =>{
+                // console.log("howdy")
+                this.anim.frame_row_index = 0;
+                this.anim.update_frame_set(this.frame_set[0], 5);
+            }, 1750);              
         }
     }
 
@@ -82,12 +85,12 @@ class Character {
             case 'Down':
                 if (this.duckVelocity === 0 && this.yVelocity === 0){
                     this.anim.frame_row_index = 1;
-                    this.anim.update_frame_set(this.frame_set[1], 4);
-                    this.duckVelocity += this.duckSpeed;
+                    this.anim.update_frame_set(this.frame_set[1], 3);
+                    this.duckVelocity += this.duckSpeed
                 }
                 break;
             default:
-                this.anim.update_frame_set(this.frame_set[0], 5);
+                this.anim.update_frame_set(this.frame_set[0], 4);
         }
         // this.anim.update_frame();        
     }
