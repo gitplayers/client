@@ -21,7 +21,7 @@ const Game = () => {
     const [ gameHost, setGameHost ] = useState("");
     const [ currentScore, setCurrentScore] = useState(0);
     const [ progressValue, setProgressValue ] = useState(100);
-    const [ chosenSprite, setChosenSprite ] = useState("");
+    const [ chosenSprite, setChosenSprite ] = useState(spriteImages["bride_var_1.png"].default);
     const speed = 15;
     const canvasRef = useRef(null); 
     const questionDelay = 10000;
@@ -56,7 +56,7 @@ const Game = () => {
     }, [])
 
     useEffect(() => {
-        if (weddingData){
+        if (Object.keys(weddingData).length > 0){
             let spriteData;
             if (weddingData.side1.id.toString() === id){
                 spriteData = weddingData.side1.character; 
@@ -66,8 +66,7 @@ const Game = () => {
             let chosenSpriteString = `${spriteData.hair_id}${spriteData.skin_id}${spriteData.dress_id}${spriteData.eyes_id}`
 
         } else {
-            let message = decideErrorMessage(405)
-            setError(message);
+            console.log("There was an error, loaded default sprite")
         }
     }, [])
 
@@ -86,7 +85,7 @@ const Game = () => {
                 character.verticalMovement(direction);
             })
 
-            character.sprite_image.src = spriteImages["bride_var_1.png"].default;
+            character.sprite_image.src = chosenSprite;
     
             window.setInterval(() => {
     
@@ -238,8 +237,9 @@ const Game = () => {
         } else {
             console.log('input your name please');
         }
-        
-        push(`/results/${weddingData.wedding_url}`)
+        if (Object.keys(weddingData).length > 0){
+            push(`/results/${weddingData.wedding_url}`)
+        }
     }
 
     const renderCurrentQuestion = () => {

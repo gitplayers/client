@@ -1,7 +1,12 @@
 import Invite from './index';
 import { screen } from '@testing-library/react';
+import * as helperFunctions from "../../Helpers";
+jest.mock("../../Helpers");
+const images = {'logo.png': { default: "abc"}}
+helperFunctions.images.mockResolvedValue(images);
 
 describe('Invite Tests', () => {
+
 	beforeEach(() => {
 		renderWithProviders(<Invite />);
 	});

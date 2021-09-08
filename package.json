@@ -26,6 +26,8 @@
     "@testing-library/user-event": "^13.2.1",
     "babel-jest": "^27.1.0",
     "babel-loader": "^8.2.2",
+    "babel-plugin-require-context-hook": "^1.0.0",
+    "babel-plugin-transform-require-context": "^0.1.1",
     "css-loader": "^6.2.0",
     "html-webpack-plugin": "^5.3.2",
     "jest": "^27.1.0",
@@ -53,8 +55,8 @@
   "jest": {
     "testEnvironment": "jsdom",
     "moduleNameMapper": {
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
-      "\\.(css|less)$": "<rootDir>/__mocks__/styleMock.js"
+      "\\.(jpg|ico|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+      "\\.(css|less)$": "<rootDir>/__mocks__/fileMock.js"
     }
   }
 }
