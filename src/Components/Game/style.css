@@ -54,3 +54,7 @@ progress {
 .questionTitle {
     margin-top:7%;
 }
+
+.characterHair, .characterSkin, .characterDress, .characterEyes {
+    position: absolute;
+}

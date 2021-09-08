@@ -19,3 +19,15 @@ main {
     height: 90%;
     margin-bottom: 3%;
 }
+
+.characterHair, .characterSkin, .characterDress, .characterEyes {
+    position: absolute;
+    transform: scale(1.25)
+}
+
+#characterDiv {
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
