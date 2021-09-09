@@ -3,6 +3,7 @@
     width: 55vw;
     height: 65vh;
     margin: 2% auto 0 auto;
+    overflow-y: auto;
 }
 
 #invite h1 {
