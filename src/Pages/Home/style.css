@@ -9,6 +9,7 @@
 .hair, .skin, .dress, .eyes {
     position: absolute;
     transform: scale(1.5);
+    image-rendering: pixelated;
 }
 
 #characterSelect {
