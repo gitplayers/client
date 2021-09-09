@@ -1,11 +1,10 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { Character, FloorObstacle, Scoreboard, DuckObstacle } from '../../GameComponents';
-import { shuffle } from '../../Helpers';
+import { obstacleSprites, shuffle, spriteImages, images } from '../../Helpers';
 import { useParams, useHistory } from 'react-router-dom';
 import './style.css';
 import axios from 'axios';
 import { useWedding } from "../../Context/WeddingContext";
-import { spriteImages, images } from '../../Helpers';
 import weddingMusic from "../../Assets/Wedding.wav";
 const BASE_URL = "https://gamein-vitation.herokuapp.com";
 let gameInProgress = true;
@@ -22,6 +21,7 @@ const Game = () => {
     const [ gameHost, setGameHost ] = useState("");
     const [ currentScore, setCurrentScore] = useState(0);
     const [ progressValue, setProgressValue ] = useState(100);
+    const [ shuffledValues, setShuffledValues] = useState([]);
     const [ chosenSprite, setChosenSprite ] = useState(spriteImages["bride_var_1.png"].default);
     const speed = 15;
     const canvasRef = useRef(null); 
@@ -39,6 +39,15 @@ const Game = () => {
                 return "There's been an error..."
         }
     }
+
+    useEffect(() => {
+        if (questions.length > 0){
+            let allAnswers = questions[0].incorrect_answers.slice(0);
+            allAnswers.push(questions[0].correct_answer);
+            allAnswers = shuffle(allAnswers);
+            setShuffledValues(allAnswers);
+        }
+    }, [questions])
 
     useEffect(() => {
         const fetchGameData = async () => {
@@ -72,6 +81,17 @@ const Game = () => {
         }
     }, [])
 
+    const assignRandomSprite = (type) => {
+        let obstacleList;
+        if (type === "floor"){
+            obstacleList = ["obstacle_0.png", "obstacle_1.png", "obstacle_2.png", "obstacle_3.png"];
+        } else {
+            obstacleList = ["obstacle_0.png", "obstacle_1.png", "obstacle_2.png"];
+        }
+        let randIndex = Math.floor(Math.random()*obstacleList.length);
+        return obstacleSprites[obstacleList[randIndex]].default;
+    }
+
 
     useEffect(() => {
         if (!loading){
@@ -91,9 +111,11 @@ const Game = () => {
             })
 
             character.sprite_image.src = chosenSprite;
-            floorObstacle.sprite_image.src = images["cake_placeholder.png"].default;
-            duckObstacle.sprite_image.src = images["cake_placeholder.png"].default;
-    
+            console.log(obstacleSprites);
+            console.log(obstacleSprites["obstacle_0.png"].default);
+            floorObstacle.sprite_image.src = assignRandomSprite("floor");
+            duckObstacle.sprite_image.src = assignRandomSprite("duck");
+            
             window.setInterval(() => {
     
                 if (gameInProgress){
@@ -108,6 +130,16 @@ const Game = () => {
                     scoreboard.update(scoreMultiplier);
                     setCurrentScore(scoreboard.score);
                     character.anim.update_frame();
+
+                    if(floorObstacle.x < -floorObstacle.width){
+                        floorObstacle.assignLocation()
+                        floorObstacle.sprite_image.src = assignRandomSprite("floor");
+                    }
+                    if(duckObstacle.x < -duckObstacle.width){
+                        duckObstacle.assignLocation()
+                        duckObstacle.sprite_image.src = assignRandomSprite("duck");
+                    }
+
 
                     if(((floorObstacle.x + floorObstacle.width > character.x && floorObstacle.x + floorObstacle.width < character.x + character.width) ||
                         (floorObstacle.x > character.x && floorObstacle.x < character.x + character.width))
@@ -218,19 +250,6 @@ const Game = () => {
         })
     }
 
-    const renderButtons = () => {
-        if (progressValue === 100){
-            let allAnswers = questions[0].incorrect_answers.slice(0);
-            allAnswers.push(questions[0].correct_answer);
-            shuffle(allAnswers);
-            return returnMappedButtons(allAnswers);
-        } else {
-            let allAnswers = questions[0].incorrect_answers.slice(0);
-            allAnswers.push(questions[0].correct_answer);
-            return returnMappedButtons(allAnswers);
-        }
-    }
-
     const gameEnd = async (e) => {
         e.preventDefault();
         let user = e.target[0].value;
@@ -254,7 +273,7 @@ const Game = () => {
             return (
                 <section>
                     <h1 className="questionTitle">{filteredQuestion}</h1>
-                    {renderButtons()}
+                    {returnMappedButtons(shuffledValues)}
                     {renderProgressBar()}
                 </section>
             )
