@@ -122,7 +122,7 @@ const Home = () => {
     }
 
     const forwardToDjango = () => {
-        window.location.assign("");
+        window.location.assign("https://gamein-vitation.herokuapp.com/");
     }
 
     return (
@@ -141,12 +141,18 @@ const Home = () => {
             <h3>We have created a bespoke wedding invitation service where you can create a custom game to share with your friends and family!</h3>
             <div className="stepDiv">
                 <h2>Step 1</h2>
+                <p>placeholder</p>
+                {/* <p>Register and configure your game!</p> */}
             </div>
             <div className="stepDiv">
                 <h2>Step 2</h2>
+                <p>placeholder</p>
+                {/* <p>Send out your personalised link to the game to your friends and family and enjoy!</p> */}
             </div>
             <div className="stepDiv">
                 <h2>Step 3</h2>
+                <p>placeholder</p>
+                {/* <p>Check out how your friends and family did with our leaderboards, and all participants can view your personalised invite!</p> */}
             </div>
             <div id="djangoButton">
                 <button onClick={forwardToDjango}>Register here!</button>

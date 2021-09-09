@@ -4,9 +4,10 @@ canvas {
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    /* background-color: darkGray; */
+    image-rendering: pixelated;
     height: 600px;
     width: 1200px;
+    border: 10px solid #BFC2C9;
 }
 
 #modal {

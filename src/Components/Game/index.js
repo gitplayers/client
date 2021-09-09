@@ -5,7 +5,7 @@ import { useParams, useHistory } from 'react-router-dom';
 import './style.css';
 import axios from 'axios';
 import { useWedding } from "../../Context/WeddingContext";
-import { spriteImages } from '../../Helpers';
+import { spriteImages, images } from '../../Helpers';
 import weddingMusic from "../../Assets/Wedding.wav";
 const BASE_URL = "https://gamein-vitation.herokuapp.com";
 let gameInProgress = true;
@@ -91,6 +91,7 @@ const Game = () => {
             })
 
             character.sprite_image.src = chosenSprite;
+            floorObstacle.sprite_image.src = images["cake_placeholder.png"].default;
     
             window.setInterval(() => {
     
@@ -110,7 +111,6 @@ const Game = () => {
                     if(((floorObstacle.x + floorObstacle.width > character.x && floorObstacle.x + floorObstacle.width < character.x + character.width) ||
                         (floorObstacle.x > character.x && floorObstacle.x < character.x + character.width))
                     && (character.y <= canvas.height - (character.height)) && (character.y > canvas.height - (character.height + floorObstacle.height))){
-                        console.log('colision!')
                         if (scoreboard.score > 100){
                             scoreboard.score -= 100;
                         } else {
@@ -120,7 +120,6 @@ const Game = () => {
                     if(((duckObstacle.x + duckObstacle.width > character.x && duckObstacle.x + duckObstacle.width < character.x + character.width) ||
                     (duckObstacle.x > character.x && duckObstacle.x < character.x + character.width))
                     && ((character.duckY <= duckObstacle.y + duckObstacle.height))){
-                        console.log('colision!')
                         if (scoreboard.score > 100){
                             scoreboard.score -= 100;
                         } else {
@@ -250,7 +249,7 @@ const Game = () => {
     const renderCurrentQuestion = () => {
 
         if (questions[0]){
-            let filteredQuestion = questions[0].question.replaceAll('{{user}}', gameHost);
+            let filteredQuestion = questions[0].question.replaceAll('{username}', gameHost);
             return (
                 <section>
                     <h1 className="questionTitle">{filteredQuestion}</h1>
@@ -303,7 +302,7 @@ const Game = () => {
         {error === "" ? <>
             {loading ? <h3>loading..</h3> : 
             <main>
-                <div role="canvas" id="canvas">
+                <div role="canvas"  id="canvas">
                     <canvas ref={canvasRef}></canvas>
                     {renderAudio()}
                 </div> 
