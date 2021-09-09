@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { Character, FloorObstacle, Scoreboard, DuckObstacle } from '../../GameComponents';
-import { obstacleSprites, shuffle, spriteImages, images } from '../../Helpers';
+import { obstacleSprites, shuffle, spriteImages, smallSprites } from '../../Helpers';
 import { useParams, useHistory } from 'react-router-dom';
 import './style.css';
 import axios from 'axios';
@@ -22,7 +22,7 @@ const Game = () => {
     const [ currentScore, setCurrentScore] = useState(0);
     const [ progressValue, setProgressValue ] = useState(100);
     const [ shuffledValues, setShuffledValues] = useState([]);
-    const [ chosenSprite, setChosenSprite ] = useState(spriteImages["bride_var_1.png"].default);
+    const [ chosenSprite, setChosenSprite ] = useState(smallSprites["1111.png"].default);
     const speed = 15;
     const canvasRef = useRef(null); 
     const audioRef = useRef(null);
@@ -69,13 +69,18 @@ const Game = () => {
     useEffect(() => {
         if (Object.keys(weddingData).length > 0){
             let spriteData;
+            console.log("happening");
             if (weddingData.side1.id.toString() === id){
                 spriteData = weddingData.side1.character; 
             } else {
                 spriteData = weddingData.side2.character;
             }
             let chosenSpriteString = `${spriteData.hair_id}${spriteData.skin_id}${spriteData.dress_id}${spriteData.eyes_id}`
-
+            console.log(chosenSpriteString);
+            let chosenSprite = smallSprites[`${chosenSpriteString}.png`]
+            if (chosenSprite){
+                setChosenSprite(chosenSprite.default)
+            }
         } else {
             console.log("There was an error, loaded default sprite")
         }
