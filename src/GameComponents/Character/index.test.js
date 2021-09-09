@@ -41,7 +41,7 @@ describe ('character functions', () => {
     let character, canvas, context;
     beforeEach(() => {
         canvas = document.createElement('canvas');
-        canvas.height = "400px";
+        canvas.height = 400;
         context = canvas.getContext('2d');
         character = new Character(context, canvas);
     })

@@ -1,7 +1,11 @@
 import Home from './index';
 import { screen } from '@testing-library/react';
+import * as helperFunctions from "../../Helpers";
+jest.mock("../../Helpers");
+const images = {'logo.png': { default: "abc"}}
+helperFunctions.images.mockResolvedValue(images);
 
-describe('Invite Tests', () => {
+describe('Home Tests', () => {
 	beforeEach(() => {
 		renderWithProviders(<Home />);
 	});
@@ -10,7 +14,5 @@ describe('Invite Tests', () => {
 		let headings = screen.getAllByRole('heading');
 		expect(headings).toHaveLength(10);
 	});
-
-
 
 });

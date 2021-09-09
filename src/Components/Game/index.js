@@ -6,6 +6,7 @@ import './style.css';
 import axios from 'axios';
 import { useWedding } from "../../Context/WeddingContext";
 import { spriteImages } from '../../Helpers';
+import weddingMusic from "../../Assets/Wedding.wav";
 const BASE_URL = "https://gamein-vitation.herokuapp.com";
 let gameInProgress = true;
 let scoreMultiplier = 1;
@@ -21,8 +22,10 @@ const Game = () => {
     const [ gameHost, setGameHost ] = useState("");
     const [ currentScore, setCurrentScore] = useState(0);
     const [ progressValue, setProgressValue ] = useState(100);
+    const [ chosenSprite, setChosenSprite ] = useState(spriteImages["bride_var_1.png"].default);
     const speed = 15;
     const canvasRef = useRef(null); 
+    const audioRef = useRef(null);
     const questionDelay = 10000;
     const modalRef = useRef(null);
 
@@ -38,7 +41,6 @@ const Game = () => {
     }
 
     useEffect(() => {
-        console.log(weddingData);
         const fetchGameData = async () => {
             try {
                 let { data } = await axios.get(`${BASE_URL}/json/${id}/`)
@@ -56,21 +58,39 @@ const Game = () => {
     }, [])
 
     useEffect(() => {
+        if (Object.keys(weddingData).length > 0){
+            let spriteData;
+            if (weddingData.side1.id.toString() === id){
+                spriteData = weddingData.side1.character; 
+            } else {
+                spriteData = weddingData.side2.character;
+            }
+            let chosenSpriteString = `${spriteData.hair_id}${spriteData.skin_id}${spriteData.dress_id}${spriteData.eyes_id}`
+
+        } else {
+            console.log("There was an error, loaded default sprite")
+        }
+    }, [])
+
+
+    useEffect(() => {
         if (!loading){
             const canvas = canvasRef.current; 
             const context = canvas.getContext('2d');
-            
             const character = new Character(context, canvas);
             const floorObstacle = new FloorObstacle(context, canvas);
             const duckObstacle = new DuckObstacle(context, canvas);
             const scoreboard = new Scoreboard(context, canvas);
-    
+            
+            audioRef.current.volume = 0.1;
+        
+
             window.addEventListener("keydown", (e) =>  {
                 const direction = e.code.replace('Arrow', '');
                 character.verticalMovement(direction);
             })
 
-            character.sprite_image.src = spriteImages["bride_var_1.png"].default;
+            character.sprite_image.src = chosenSprite;
     
             window.setInterval(() => {
     
@@ -222,8 +242,9 @@ const Game = () => {
         } else {
             console.log('input your name please');
         }
-        
-        push(`/results/${weddingData.wedding_url}`)
+        if (Object.keys(weddingData).length > 0){
+            push(`/results/${weddingData.wedding_url}`)
+        }
     }
 
     const renderCurrentQuestion = () => {
@@ -263,6 +284,20 @@ const Game = () => {
         return (<progress value={progressValue} max="100"></progress>)
     }
 
+    const renderAudio = () => {
+        return (
+            <audio ref={audioRef} src={weddingMusic} autoPlay loop></audio>
+        )
+    }
+
+    const toggleMute = () => {
+        if (audioRef.current.muted){
+            audioRef.current.muted = false;
+        } else {
+            audioRef.current.muted = true;
+        }
+    }
+
     return (
         <>
         {error === "" ? <>
@@ -270,9 +305,13 @@ const Game = () => {
             <main>
                 <div role="canvas" id="canvas">
                     <canvas ref={canvasRef}></canvas>
+                    {renderAudio()}
                 </div> 
                 <div role="modal"id="modal" ref={modalRef}>
                     {renderCurrentQuestion()}
+                </div>
+                <div>
+                    <button onClick={toggleMute}>Mute/unmute audio</button>
                 </div>
             </main>
             } </>: <h3>{error}</h3>} 
