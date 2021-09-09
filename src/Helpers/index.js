@@ -26,7 +26,7 @@ function importAll(r) {
 	return images;
   }
   
-const images = importAll(require.context('../Assets', false, /\.(png|jpe?g|svg)$/));
+const images = importAll(require.context('../Assets', false, /\.(png|jpe?g|svg|gif)$/));
 const largeSpriteImages = importAll(require.context('../Components/Game/large sprites', false, /\.(png|jpe?g|svg)$/));
 const spriteImages = importAll(require.context('../GameComponents/Character/sprites', false, /\.(png|jpe?g|svg)$/));
 const obstacleSprites = importAll(require.context('../GameComponents/ObstacleSprites', false, /\.(png|jpe?g|svg)$/));

@@ -3,6 +3,8 @@ import "./style.css";
 import { images, largeSpriteImages } from '../../Helpers';
 const Home = () => {
 
+    console.log(images);
+
     const [ currentHair, setCurrentHair ] = useState('H1');
     const [ currentSkin, setCurrentSkin ] = useState('S1'); 
     const [ currentDress, setCurrentDress ] = useState('D1');
@@ -149,7 +151,7 @@ const Home = () => {
                 <div className="img2Div">
                     <img src={images["croppedBlushLaptop.png"].default}></img>
                     <div id="absoluteGifDiv">
-                        <img src={images["invite.png"].default}></img>
+                        <img src={images["gamelap4.gif"].default}></img>
                     </div>
                 </div>
             </div>
