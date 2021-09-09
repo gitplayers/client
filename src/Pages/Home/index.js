@@ -3,6 +3,8 @@ import "./style.css";
 import { images, largeSpriteImages } from '../../Helpers';
 const Home = () => {
 
+    console.log(images);
+
     const [ currentHair, setCurrentHair ] = useState('H1');
     const [ currentSkin, setCurrentSkin ] = useState('S1'); 
     const [ currentDress, setCurrentDress ] = useState('D1');
@@ -128,42 +130,55 @@ const Home = () => {
     return (
         <>
             <div>
-                <h2>Have you just got engaged?</h2>
-                <h2>Do you and your friends enjoy fast paced games?</h2>
-                <h2>Do you want to test your friends and family's knowledge about you and your partner?</h2>
-            </div>
-            <div>
                 <h1>Welcome to Gamevitation!</h1>
             </div>
             <div>
                 <img src={images["logo.png"].default}></img>
             </div>
+            <div>
+                <h2>Are you looking to spice up the traditional event invitation process?</h2>
+                <h2>Tired of creating standard invitations with designs that have been used 100s of times?</h2>
+                <h2>You've come to the right place..</h2>
+            </div>
+
             <h3>We have created a bespoke wedding invitation service where you can create a custom game to share with your friends and family!</h3>
+
             <div className="stepDiv">
-                <h2>Step 1</h2>
-                <p>placeholder</p>
-                {/* <p>Register and configure your game!</p> */}
+                <div className="text2Div">
+                    <h2>Fast paced gameplay with custom questions</h2>
+                    <p>Send your guests your uniquely generated game link loaded with your personalised answers to questions inputted in your custom game configuration. Watch the leaderboards fill up as your guests submit their scores and compete to show who knows you best while enjoying fun gameplay complete with our own music.</p>
+                </div>
+                <div className="img2Div">
+                    <img src={images["croppedBlushLaptop.png"].default}></img>
+                    <div id="absoluteGifDiv">
+                        <img src={images["gamelap4.gif"].default}></img>
+                    </div>
+                </div>
+            </div>
+            <div className="finalStepDiv">
+                <div className="img3Div">
+                    <button id="genderToggle" onClick={toggleGender}>Toggle character style</button>
+                    {renderCharacterSelect()}
+                </div>
+                <div className="text3Div">
+                    <h2>Complete character customizability</h2>
+                    <p>Flexible character design tailored to your own appearance that will become the character running in the game to be operated by your guests! We have included fully interchangeable eyes, hair, skin and outfits - both character styles can wear either a suit or a dress, we're all about inclusivity!</p>
+                </div>
             </div>
             <div className="stepDiv">
-                <h2>Step 2</h2>
-                <p>placeholder</p>
-                {/* <p>Send out your personalised link to the game to your friends and family and enjoy!</p> */}
-            </div>
-            <div className="stepDiv">
-                <h2>Step 3</h2>
-                <p>placeholder</p>
-                {/* <p>Check out how your friends and family did with our leaderboards, and all participants can view your personalised invite!</p> */}
+                <div className="textDiv">
+                    <h2>Gamified shareable invitation</h2>
+                    <p>Input the title and message of your custom invitation as you would a normal invite to provide necessary information to your guests, after your guests get their thrills from the gaming experience, this is the place to get down to business with the details of your special day.</p>
+                </div>
+                <div className="imgDiv">
+                    <img src={images["blushScreen.png"].default}></img>
+                    <div id="absoluteInviteDiv">
+                        <img src={images["invite.png"].default}></img>
+                    </div>
+                </div>
             </div>
             <div id="djangoButton">
-                <button onClick={forwardToDjango}>Register here!</button>
-            </div>
-            <div >
-                <h2>Checkout our game in action here</h2>
-            </div>
-            <div>
-                <h2>Checkout some of our character customization</h2>
-                <button id="genderToggle" onClick={toggleGender}>Toggle character style</button>
-                {renderCharacterSelect()}
+                <button onClick={forwardToDjango}>Register now!</button>
             </div>
         </>
     );

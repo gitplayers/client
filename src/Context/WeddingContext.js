@@ -23,8 +23,6 @@ export function WeddingProvider({children}) {
     }
 
     function weddingLink(data){
-        console.log('data set')
-        console.log(data);
         setWeddingData(data);
     }
 

@@ -1,11 +1,10 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { Character, FloorObstacle, Scoreboard, DuckObstacle } from '../../GameComponents';
-import { shuffle } from '../../Helpers';
+import { obstacleSprites, shuffle, spriteImages, smallSprites } from '../../Helpers';
 import { useParams, useHistory } from 'react-router-dom';
 import './style.css';
 import axios from 'axios';
 import { useWedding } from "../../Context/WeddingContext";
-import { spriteImages, images } from '../../Helpers';
 import weddingMusic from "../../Assets/Wedding.wav";
 const BASE_URL = "https://gamein-vitation.herokuapp.com";
 let gameInProgress = true;
@@ -22,7 +21,8 @@ const Game = () => {
     const [ gameHost, setGameHost ] = useState("");
     const [ currentScore, setCurrentScore] = useState(0);
     const [ progressValue, setProgressValue ] = useState(100);
-    const [ chosenSprite, setChosenSprite ] = useState(spriteImages["bride_var_1.png"].default);
+    const [ shuffledValues, setShuffledValues] = useState([]);
+    const [ chosenSprite, setChosenSprite ] = useState(smallSprites["1111.png"].default);
     const speed = 15;
     const canvasRef = useRef(null); 
     const audioRef = useRef(null);
@@ -39,6 +39,15 @@ const Game = () => {
                 return "There's been an error..."
         }
     }
+
+    useEffect(() => {
+        if (questions.length > 0){
+            let allAnswers = questions[0].incorrect_answers.slice(0);
+            allAnswers.push(questions[0].correct_answer);
+            allAnswers = shuffle(allAnswers);
+            setShuffledValues(allAnswers);
+        }
+    }, [questions])
 
     useEffect(() => {
         const fetchGameData = async () => {
@@ -60,17 +69,33 @@ const Game = () => {
     useEffect(() => {
         if (Object.keys(weddingData).length > 0){
             let spriteData;
+            console.log("happening");
             if (weddingData.side1.id.toString() === id){
                 spriteData = weddingData.side1.character; 
             } else {
                 spriteData = weddingData.side2.character;
             }
             let chosenSpriteString = `${spriteData.hair_id}${spriteData.skin_id}${spriteData.dress_id}${spriteData.eyes_id}`
-
+            console.log(chosenSpriteString);
+            let chosenSprite = smallSprites[`${chosenSpriteString}.png`]
+            if (chosenSprite){
+                setChosenSprite(chosenSprite.default)
+            }
         } else {
             console.log("There was an error, loaded default sprite")
         }
     }, [])
+
+    const assignRandomSprite = (type) => {
+        let obstacleList;
+        if (type === "floor"){
+            obstacleList = ["obstacle_0.png", "obstacle_1.png", "obstacle_2.png", "obstacle_3.png"];
+        } else {
+            obstacleList = ["obstacle_0.png", "obstacle_1.png", "obstacle_2.png"];
+        }
+        let randIndex = Math.floor(Math.random()*obstacleList.length);
+        return obstacleSprites[obstacleList[randIndex]].default;
+    }
 
 
     useEffect(() => {
@@ -91,8 +116,9 @@ const Game = () => {
             })
 
             character.sprite_image.src = chosenSprite;
-            floorObstacle.sprite_image.src = images["cake_placeholder.png"].default;
-    
+            floorObstacle.sprite_image.src = assignRandomSprite("floor");
+            duckObstacle.sprite_image.src = assignRandomSprite("duck");
+            
             window.setInterval(() => {
     
                 if (gameInProgress){
@@ -107,6 +133,16 @@ const Game = () => {
                     scoreboard.update(scoreMultiplier);
                     setCurrentScore(scoreboard.score);
                     character.anim.update_frame();
+
+                    if(floorObstacle.x < -floorObstacle.width){
+                        floorObstacle.assignLocation()
+                        floorObstacle.sprite_image.src = assignRandomSprite("floor");
+                    }
+                    if(duckObstacle.x < -duckObstacle.width){
+                        duckObstacle.assignLocation()
+                        duckObstacle.sprite_image.src = assignRandomSprite("duck");
+                    }
+
 
                     if(((floorObstacle.x + floorObstacle.width > character.x && floorObstacle.x + floorObstacle.width < character.x + character.width) ||
                         (floorObstacle.x > character.x && floorObstacle.x < character.x + character.width))
@@ -217,19 +253,6 @@ const Game = () => {
         })
     }
 
-    const renderButtons = () => {
-        if (progressValue === 100){
-            let allAnswers = questions[0].incorrect_answers.slice(0);
-            allAnswers.push(questions[0].correct_answer);
-            shuffle(allAnswers);
-            return returnMappedButtons(allAnswers);
-        } else {
-            let allAnswers = questions[0].incorrect_answers.slice(0);
-            allAnswers.push(questions[0].correct_answer);
-            return returnMappedButtons(allAnswers);
-        }
-    }
-
     const gameEnd = async (e) => {
         e.preventDefault();
         let user = e.target[0].value;
@@ -253,7 +276,7 @@ const Game = () => {
             return (
                 <section>
                     <h1 className="questionTitle">{filteredQuestion}</h1>
-                    {renderButtons()}
+                    {returnMappedButtons(shuffledValues)}
                     {renderProgressBar()}
                 </section>
             )
@@ -302,8 +325,8 @@ const Game = () => {
         {error === "" ? <>
             {loading ? <h3>loading..</h3> : 
             <main>
-                <div role="canvas"  id="canvas">
-                    <canvas ref={canvasRef}></canvas>
+                <div role="canvas" id="canvas">
+                    <canvas id="borderMe" ref={canvasRef}></canvas>
                     {renderAudio()}
                 </div> 
                 <div role="modal"id="modal" ref={modalRef}>

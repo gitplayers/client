@@ -30,14 +30,9 @@ const Invite = () => {
     const renderInvitationMessage = () => {
         if (invitationData.message){
             let message = invitationData.message.slice(0)
-            console.log(message);
             for (let i = 0; i<(1000-message.length); i++){
                 message = message + " .";
             }
-            console.log(message);
-            // while (message.length < 400){
-            //     message = message + "";
-            // }
             return (<p>{message}</p>)
         }
     }
