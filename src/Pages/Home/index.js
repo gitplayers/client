@@ -122,7 +122,7 @@ const Home = () => {
     }
 
     const forwardToDjango = () => {
-        window.location.assign("");
+        window.location.assign("https://gamein-vitation.herokuapp.com/");
     }
 
     return (
