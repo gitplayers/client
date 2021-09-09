@@ -92,6 +92,7 @@ const Game = () => {
 
             character.sprite_image.src = chosenSprite;
             floorObstacle.sprite_image.src = images["cake_placeholder.png"].default;
+            duckObstacle.sprite_image.src = images["cake_placeholder.png"].default;
     
             window.setInterval(() => {
     
@@ -302,8 +303,8 @@ const Game = () => {
         {error === "" ? <>
             {loading ? <h3>loading..</h3> : 
             <main>
-                <div role="canvas"  id="canvas">
-                    <canvas ref={canvasRef}></canvas>
+                <div role="canvas" id="canvas">
+                    <canvas id="borderMe" ref={canvasRef}></canvas>
                     {renderAudio()}
                 </div> 
                 <div role="modal"id="modal" ref={modalRef}>

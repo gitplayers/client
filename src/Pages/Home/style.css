@@ -1,14 +1,87 @@
-.stepDiv {
-    height: 20vw;
-    width: 25vw;
-    border: 1px solid black;
+.stepDiv, .finalStepDiv {
+    margin: 1% auto;
+    height: 22vw;
+    width: 67vw;
+}
+
+.finalStepDiv {
+    height: 25vw;
+}
+
+.imgDiv, .textDiv {
+    width: 45%;
     display: inline-block;
-    margin: 1%;
+    margin: 0 2%;
+    height: 100%;
+}
+
+.text2Div, .img2Div, .img3Div, .text3Div {
+    display: inline-block;
+    height: 100%;
+    margin: 0 1%;
+}
+
+.img3Div {
+    vertical-align: top;
+    width: 40%;
+}
+
+.img2Div {
+    width: 58%;
+}
+
+.img2Div img{
+    height: 100%;
+    width: 100%;
+}
+.text3Div {
+    width: 50%;
+}
+
+.text2Div {
+    width: 35%;
+}
+
+.textDiv, .text2Div {
+    vertical-align: top;
+}
+
+.textDiv p, .text2Div p, .text3Div p {
+    font-size: 2.3vh;
+}
+
+.textDiv h2, .text2Div h2 {
+    margin-top: 14%;
+}
+
+.text3Div h2 {
+    margin-top: 21%;
+}
+
+#absoluteInviteDiv img, .imgDiv img, #absoluteGifDiv img {
+    width: 100%;
+    height: 100%;
+}
+
+#absoluteGifDiv {
+    position: relative;
+    bottom: 90%;
+    height: 66%;
+    width: 52%;
+    left: 25%;
+}
+
+#absoluteInviteDiv {
+    position: relative;
+    bottom: 90%;
+    width: 80%;
+    height: 59%;
+    left: 10%;
 }
 
 .hair, .skin, .dress, .eyes {
     position: absolute;
-    transform: scale(1.5);
+    transform: scale(1);
     image-rendering: pixelated;
 }
 
@@ -17,17 +90,20 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 40vw;
-    height: 50vh;
+    width: 100%;
+    height: 90%;
 }
 
-#djangoButton {
-    margin-top: 1%;
-}
 
 .buttonDiv button {
     font-size: 1.5rem;
     border-radius: 20%;
+    background-color: darkgray;
+}
+
+.buttonDiv button:hover {
+    background-color: rgb(212, 211, 211);
+    transform: scale(1.0);
 }
 
 .buttonDiv {
@@ -42,4 +118,20 @@
 #prevButtons {
     position: relative;
     right: 40%;
+}
+
+
+#djangoButton {
+    margin-top: 3%;
+    margin-bottom: 4%;
+}
+
+#djangoButton button {
+    font-size: 3rem;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+#djangoButton button:hover {
+    transform: scale(1.1);
 }
