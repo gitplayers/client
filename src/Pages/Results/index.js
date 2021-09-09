@@ -78,8 +78,6 @@ const Results = () => {
 
     useEffect(() => {
         const fetchScores = async () => {
-            console.log(weddingData);
-            
             if (Object.keys(weddingData).length === 0){
                 let results = await weddingFetch(wedding_name);
                 if (!results.side1){

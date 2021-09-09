@@ -111,8 +111,6 @@ const Game = () => {
             })
 
             character.sprite_image.src = chosenSprite;
-            console.log(obstacleSprites);
-            console.log(obstacleSprites["obstacle_0.png"].default);
             floorObstacle.sprite_image.src = assignRandomSprite("floor");
             duckObstacle.sprite_image.src = assignRandomSprite("duck");
             

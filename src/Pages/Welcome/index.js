@@ -19,7 +19,6 @@ const Welcome = () => {
     useEffect(() => {
         const retrieveWeddingData = async () => {
             let data = await weddingFetch(wedding_name);
-            console.log(data);
             if (data.side1){
                 let players = [];
                 let ids = [];
