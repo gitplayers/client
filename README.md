@@ -15,7 +15,7 @@
 
 ## Usage of the application
 
-- Click register at the bottom of the landing page at the link provided.
+- Click register at the bottom of the landing page (here)[https://gamevitation.netlify.app/]
 - After being navigated to the server landing page, register an account with the link in the top right. 
 - After configuring the game, use the prodivded link to your event that you can share with your friends to play the game!
 
