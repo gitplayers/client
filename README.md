@@ -1,3 +1,7 @@
+### Gamevitation
+
+Welcome to Gamevitation by Monica, Samekah and Zak
+
 ## Technologies
 - React 
 - Html canvas
@@ -11,6 +15,8 @@
 
 ## Installation
 
+- clone down the repo using `git clone https://github.com/gitplayers/client.git`
+- install the depenfancies using `npm install`
 - To run the application on your own machine `npm run dev`
 
 ## Usage of the application
