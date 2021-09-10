@@ -10,10 +10,7 @@ class Animation{
 
     // If the current frame set is different to the incomming one, change the frame_set
     update_frame_set(frame_set, delay =1){
-        // console.log(delay)
-        // console.log(this.frame_set)
         if(this.frame_set != frame_set){
-            // console.log("HOWDY")
             this.count = 0;             
             this.delay = delay;      
             this.frame_index = 0;    
@@ -25,11 +22,7 @@ class Animation{
     //if the current frame has been shown for the correct amount of time, switch to the next frame
     update_frame(){
         this.count++;
-        // console.log(this.count)
         if(this.count >= this.delay){
-            // console.log("HERE")
-            // console.log(this.frame_index)
-            
             this.count = 0;
             // if the frame index is the last item in the item set 
             this.frame_index = (this.frame_index == this.frame_set.length -1) ? 0 : this.frame_index + 1;
