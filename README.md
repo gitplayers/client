@@ -1,3 +1,25 @@
+## Technologies
+- React 
+- Html canvas
+- Chart.js
+- Jest
+- Javascript/Html
+- CSS
+
+## Deployment
+- Netlify
+
+## Installation
+
+- To run the application on your own machine `npm run dev`
+
+### Usage
+
+* Run docker-compose up on another terminal
+* Run in the pipenv shell terminal pipenv run dev to launch
+* Go to localhost:8000 to view the server app
+
+
 ## Endpoint routes USER
 
 | Route          |  Description                                             |
