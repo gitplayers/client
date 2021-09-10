@@ -13,12 +13,11 @@
 
 - To run the application on your own machine `npm run dev`
 
-### Usage
+## Usage of the application
 
-* Run docker-compose up on another terminal
-* Run in the pipenv shell terminal pipenv run dev to launch
-* Go to localhost:8000 to view the server app
-
+- Click register at the bottom of the landing page at the link provided.
+- After being navigated to the server landing page, register an account with the link in the top right. 
+- After configuring the game, use the prodivded link to your event that you can share with your friends to play the game!
 
 ## Endpoint routes USER
 
