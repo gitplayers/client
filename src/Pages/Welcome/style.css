@@ -21,7 +21,8 @@ main {
 
 .characterHair, .characterSkin, .characterDress, .characterEyes {
     position: absolute;
-    transform: scale(1.25)
+    transform: scale(1.25);
+    image-rendering: pixelated;
 }
 
 #characterDiv {
